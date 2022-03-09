@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema({
     salt: String
 });
 
+//Password virtual field
 UserSchema
     .virtual("password")
     .set(function(password) {
@@ -35,6 +36,7 @@ UserSchema
     .get(function() {
         return this._password;
     });
+//User schema methods for hashing, authenticating and salting
 UserSchema.methods = {
     authenticate: function(plainText) {
         return this.encryptPassword(plainText) === this.hashed_password;
@@ -54,6 +56,7 @@ UserSchema.methods = {
         return Math.round((new Date().valueOf() * Math.random())) + ""
     }
 }
+//password validation
 UserSchema.path("hashed_password").validate(function(v){
     if (this._password && this._password.length < 6) {
         this.invalidate("password", "Password must be at least 6 characters.");
