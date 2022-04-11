@@ -5,8 +5,6 @@ import errorHandler from "../helpers/dbErrorHandler";
 const create = async (req, res) => {
     
     const user = new User(req.body);
-    console.log(user);
-    console.log(user.password);
 
     try {
         await user.save();

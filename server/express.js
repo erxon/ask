@@ -7,7 +7,10 @@ import helmet from "helmet";
 import Template from "./../template";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import questionRoutes from "./routes/question.route";
+import path from "path";
 
+const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
 app.use(bodyParser.json());
@@ -17,9 +20,11 @@ app.use(compress());
 app.use(helmet());
 app.use(cors());
 
+app.use("/dist", express.static(path.join(CURRENT_WORKING_DIR, "dist")));
+
 app.use("/", userRoutes);
 app.use("/", authRoutes);
-
+app.use("/", questionRoutes);
 app.get("/", (req, res) => {
     res.status(200).send(Template());
 });
