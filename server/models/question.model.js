@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const QuestionSchema = {
+const QuestionSchema = new mongoose.Schema({
     questionTitle: String,
     questionBody: String,
     userId: String,
@@ -10,8 +10,8 @@ const QuestionSchema = {
     },
     updated: Date,
     comments: []
-}
+})
 
-const Question = mongoose.model("Question", QuestionSchema);
+const Question = new mongoose.model("Question", QuestionSchema);
 
 export default Question;
