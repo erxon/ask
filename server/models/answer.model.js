@@ -4,6 +4,7 @@ const AnswerSchema = new mongoose.Schema({
     answerTitle: String,
     answerBody: String,
     questionId: String,
+    vote: Number,
     comments: [],
     created: {
         type: Date,
