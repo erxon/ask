@@ -1,17 +1,18 @@
 import express from "express";
 import answerCtrl from "../controllers/answer.controller.js";
+import authCtrl from "../controllers/auth.controller";
 
 const router = express.Router();
 
 router.route("/api/answers")
-    .post(answerCtrl.create);
+    .post(authCtrl.requireSignin, answerCtrl.create);
 
 router.route("/api/answers/:questionId")
     .get(answerCtrl.list)
     
 router.route("/api/answers/:answerId")
-    .put(answerCtrl.update)
-    .delete(answerCtrl.remove);
+    .put(authCtrl.requireSignin, answerCtrl.update)
+    .delete(authCtrl.requireSignin, answerCtrl.remove);
 
 router.param("answerId", answerCtrl.answerByID);
 

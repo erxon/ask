@@ -1,16 +1,17 @@
 import express from "express";
 import questionCtrl from "../controllers/question.controller.js";
+import authCtrl from "../controllers/auth.controller";
 
 const router = express.Router();
 
 router.route("/api/questions")
     .get(questionCtrl.list)
-    .post(questionCtrl.create);
+    .post(authCtrl.requireSignin, questionCtrl.create);
     
 router.route("/api/questions/:questionId")
     .get(questionCtrl.read)
-    .put(questionCtrl.update)
-    .delete(questionCtrl.remove);
+    .put(authCtrl.requireSignin, questionCtrl.update)
+    .delete(authCtrl.requireSignin, questionCtrl.remove);
 
 router.param("questionId", questionCtrl.questionByID);
 
