@@ -36,12 +36,17 @@ const answerByID = async (req, res, next) => {
             })
         }
         req.answer = foundAnswer;
+        next();
     } catch(err){
         return res.json(400).json({
             error: errorHandler.getErrorMessage(err)
         });
     }
-    next();
+}
+
+const read = (req, res) => {
+    let answer = req.answer;
+    return res.json(answer);
 }
 
 const update = async (req, res) => {
@@ -52,7 +57,7 @@ const update = async (req, res) => {
 
         await answerToEdit.save();
 
-       res.json(answerToEdit);
+        res.json(answerToEdit);
     } catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -72,4 +77,46 @@ const remove = async (req, res) => {
     }
 }
 
-export default {create, list, answerByID, update, remove};
+const vote = async (req, res) => {
+    try{
+        let edittedAnswer = req.answer;
+        edittedAnswer.votes += 1
+
+        edittedAnswer.usersVoted.push(req.body.userId);
+
+        await edittedAnswer.save();
+        res.json(edittedAnswer);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
+const cancelVote = async (req, res) => {
+    try{
+        let edittedAnswer = req.answer;
+        edittedAnswer.votes -= 1;
+
+        edittedAnswer.usersVoted = edittedAnswer.usersVoted.filter(id => {
+            return id !== req.body.userId;
+        });
+
+        await edittedAnswer.save();
+        res.json(edittedAnswer);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
+export default {
+    create, list, 
+    answerByID, 
+    read, 
+    update, 
+    remove, 
+    vote,
+    cancelVote
+};

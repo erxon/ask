@@ -13,6 +13,12 @@ router.route("/api/questions/:questionId")
     .put(authCtrl.requireSignin, questionCtrl.update)
     .delete(authCtrl.requireSignin, questionCtrl.remove);
 
+router.route("/api/questions/vote/:questionId")
+    .put(authCtrl.requireSignin, questionCtrl.vote);
+    
+router.route("/api/questions/cancelvote/:questionId")
+    .put(authCtrl.requireSignin, questionCtrl.cancelVote);
+
 router.param("questionId", questionCtrl.questionByID);
 
 export default router;

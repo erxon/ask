@@ -45,7 +45,7 @@ const questionByID = async (req, res, next) => {
     }
 }
 
-const read = async (req, res) => {
+const read = (req, res) => {
     return res.json(req.question);
 }
 const update = async (req, res) => {
@@ -73,5 +73,48 @@ const remove = async (req, res) => {
     }
 }
 
+const vote = async (req, res) => {
+    try{
+        let edittedQuestion = req.question;
+        edittedQuestion.votes += 1
 
-export default {create, list, read, update, remove, questionByID};
+        edittedQuestion.usersVoted.push(req.body.userId);
+
+        await edittedQuestion.save();
+        res.json(edittedQuestion);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
+const cancelVote = async (req, res) => {
+    try{
+        let edittedQuestion = req.question;
+        edittedQuestion.votes -= 1;
+
+        edittedQuestion.usersVoted = edittedQuestion.usersVoted.filter(id => {
+            return id !== req.body.userId;
+        });
+
+        await edittedQuestion.save();
+        res.json(edittedQuestion);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
+
+export default {
+    create, 
+    list, 
+    read, 
+    update, 
+    remove, 
+    questionByID,
+    vote,
+    cancelVote
+};

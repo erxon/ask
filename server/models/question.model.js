@@ -4,13 +4,18 @@ const QuestionSchema = new mongoose.Schema({
     questionTitle: String,
     questionBody: String,
     userId: String,
-    vote: Number,
+    votes: {
+        type: Number,
+        default: 0,
+        min: [0, "invalid"]
+    },
     created: {
         type: Date,
         default: Date.now
     },
     updated: Date,
-    comments: []
+    comments: [],
+    usersVoted: []
 })
 
 const Question = new mongoose.model("Question", QuestionSchema);
