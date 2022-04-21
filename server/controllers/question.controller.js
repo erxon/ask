@@ -76,10 +76,8 @@ const remove = async (req, res) => {
 const vote = async (req, res) => {
     try{
         let edittedQuestion = req.question;
-        edittedQuestion.votes += 1
-
         edittedQuestion.usersVoted.push(req.body.userId);
-
+        
         await edittedQuestion.save();
         res.json(edittedQuestion);
     } catch (err) {
@@ -88,16 +86,13 @@ const vote = async (req, res) => {
         })
     }
 }
-
-const cancelVote = async (req, res) => {
+const unvote = async (req, res) => {
     try{
         let edittedQuestion = req.question;
-        edittedQuestion.votes -= 1;
-
-        edittedQuestion.usersVoted = edittedQuestion.usersVoted.filter(id => {
-            return id !== req.body.userId;
-        });
-
+        edittedQuestion.usersVoted = edittedQuestion.usersVoted.filter(
+            id => id !== req.body.userId
+        );
+        
         await edittedQuestion.save();
         res.json(edittedQuestion);
     } catch (err) {
@@ -107,6 +102,35 @@ const cancelVote = async (req, res) => {
     }
 }
 
+const comment = async (req, res) => {
+    try{
+        let question = req.question;
+        question.comments.push(req.body);
+
+        await question.save();
+        res.json(question);
+    } catch(err){
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+}
+
+const deleteComment = async (req, res) => {
+    try{
+        let question = req.question;
+        question.comments = question.comments.filter(
+            object => object.userId !== req.body.userId
+        );
+
+        await question.save();
+        res.json(question);
+    } catch(err){
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+}
 
 export default {
     create, 
@@ -116,5 +140,7 @@ export default {
     remove, 
     questionByID,
     vote,
-    cancelVote
+    unvote,
+    comment,
+    deleteComment
 };

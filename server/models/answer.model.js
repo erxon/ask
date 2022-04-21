@@ -4,18 +4,13 @@ const AnswerSchema = new mongoose.Schema({
     answerTitle: String,
     answerBody: String,
     questionId: String,
-    votes: {
-        type: Number,
-        default: 0,
-        min: [0, "invalid"]
-    },
+    usersVoted: [],
     comments: [],
     created: {
         type: Date,
         default: Date.now
     },
-    updated: Date,
-    usersVoted: []
+    updated: Date
 });
 
 const Answer = new mongoose.model("Answer", AnswerSchema);

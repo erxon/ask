@@ -76,38 +76,64 @@ const remove = async (req, res) => {
         });
     }
 }
-
 const vote = async (req, res) => {
     try{
-        let edittedAnswer = req.answer;
-        edittedAnswer.votes += 1
+        let answerToEdit = req.answer;
+        answerToEdit.usersVoted.push(req.body.userId);
 
-        edittedAnswer.usersVoted.push(req.body.userId);
-
-        await edittedAnswer.save();
-        res.json(edittedAnswer);
-    } catch (err) {
+        await answerToEdit.save();
+        res.json(answerToEdit);
+    } catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
-        })
+        });
     }
 }
 
-const cancelVote = async (req, res) => {
+const unvote = async (req, res) => {
     try{
-        let edittedAnswer = req.answer;
-        edittedAnswer.votes -= 1;
+        let answerToEdit = req.answer;
+        answerToEdit.usersVoted = answerToEdit.usersVoted.filter(
+            id => id !== req.body.userId
+        );
 
-        edittedAnswer.usersVoted = edittedAnswer.usersVoted.filter(id => {
-            return id !== req.body.userId;
-        });
+        await answerToEdit.save();
 
-        await edittedAnswer.save();
-        res.json(edittedAnswer);
-    } catch (err) {
+        res.json(answerToEdit);
+    } catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
-        })
+        });
+    }
+}
+
+const comment = async (req, res) => {
+    try{
+        let answerToEdit = req.answer;
+        answerToEdit.comments.push(req.body);
+
+        await answerToEdit.save();
+        res.json(answerToEdit);
+    } catch(err){
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+}
+
+const deleteComment = async (req, res) => {
+    try{
+        let answerToEdit = req.answer;
+        answerToEdit.comments = answerToEdit.comments.filter(
+            object => object.userId !== req.body.userId
+        );
+
+        await answerToEdit.save();
+        res.json(answerToEdit);
+    } catch(err){
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
     }
 }
 
@@ -116,7 +142,9 @@ export default {
     answerByID, 
     read, 
     update, 
-    remove, 
+    remove,
     vote,
-    cancelVote
+    unvote,
+    comment,
+    deleteComment
 };
