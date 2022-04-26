@@ -9,6 +9,8 @@ import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
 import questionRoutes from "./routes/question.route";
 import answerRoutes from "./routes/answer.route";
+import commentRoutes from "./routes/comment.route";
+
 import path from "path";
 
 const CURRENT_WORKING_DIR = process.cwd();
@@ -27,6 +29,7 @@ app.use("/", userRoutes);
 app.use("/", authRoutes);
 app.use("/", questionRoutes);
 app.use("/", answerRoutes);
+app.use("/", commentRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).send(Template());

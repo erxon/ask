@@ -21,11 +21,6 @@ router.route("/api/answers/vote/:answerId")
 router.route("/api/answers/unvote/:answerId")
     .put(authCtrl.requireSignin, answerCtrl.unvote);
 
-router.route("/api/answers/comment/:answerId")
-    .put(authCtrl.requireSignin, answerCtrl.comment);
-
-router.route("/api/answers/deletecomment/:answerId")
-    .put(authCtrl.requireSignin, answerCtrl.deleteComment);
 
 router.param("answerId", answerCtrl.answerByID);
 

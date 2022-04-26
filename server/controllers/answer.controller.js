@@ -51,13 +51,13 @@ const read = (req, res) => {
 
 const update = async (req, res) => {
     try{
-        let answerToEdit = req.answer;
-        answerToEdit = extend(answerToEdit, req.body);
-        answerToEdit.updated = Date.now();
+        let answer = req.answer;
+        answer = extend(answer, req.body);
+        answer.updated = Date.now();
 
-        await answerToEdit.save();
+        await answer.save();
 
-        res.json(answerToEdit);
+        res.json(answer);
     } catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -107,35 +107,35 @@ const unvote = async (req, res) => {
     }
 }
 
-const comment = async (req, res) => {
-    try{
-        let answerToEdit = req.answer;
-        answerToEdit.comments.push(req.body);
+// const comment = async (req, res) => {
+//     try{
+//         let answerToEdit = req.answer;
+//         answerToEdit.comments.push(req.body);
 
-        await answerToEdit.save();
-        res.json(answerToEdit);
-    } catch(err){
-        return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-        });
-    }
-}
+//         await answerToEdit.save();
+//         res.json(answerToEdit);
+//     } catch(err){
+//         return res.status(400).json({
+//             error: errorHandler.getErrorMessage(err)
+//         });
+//     }
+// }
 
-const deleteComment = async (req, res) => {
-    try{
-        let answerToEdit = req.answer;
-        answerToEdit.comments = answerToEdit.comments.filter(
-            object => object.userId !== req.body.userId
-        );
+// const deleteComment = async (req, res) => {
+//     try{
+//         let answerToEdit = req.answer;
+//         answerToEdit.comments = answerToEdit.comments.filter(
+//             object => object.userId !== req.body.userId
+//         );
 
-        await answerToEdit.save();
-        res.json(answerToEdit);
-    } catch(err){
-        return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-        });
-    }
-}
+//         await answerToEdit.save();
+//         res.json(answerToEdit);
+//     } catch(err){
+//         return res.status(400).json({
+//             error: errorHandler.getErrorMessage(err)
+//         });
+//     }
+// }
 
 export default {
     create, list, 
@@ -144,7 +144,5 @@ export default {
     update, 
     remove,
     vote,
-    unvote,
-    comment,
-    deleteComment
+    unvote
 };

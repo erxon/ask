@@ -19,12 +19,6 @@ router.route("/api/questions/vote/:questionId")
 router.route("/api/questions/unvote/:questionId")
     .put(authCtrl.requireSignin, questionCtrl.unvote);
 
-router.route("/api/questions/comment/:questionId")
-    .put(authCtrl.requireSignin, questionCtrl.comment);
-
-router.route("/api/questions/deletecomment/:questionId")
-    .put(authCtrl.requireSignin, questionCtrl.deleteComment);
-
 router.param("questionId", questionCtrl.questionByID);
 
 export default router;

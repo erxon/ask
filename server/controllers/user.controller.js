@@ -105,4 +105,4 @@ const photo = (req, res, next) => {
 };
    
 
-export default { create, userByID, read, list, remove, update, photo };
+export default { create, userByID, read, list, remove, update, photo};

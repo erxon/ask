@@ -102,35 +102,7 @@ const unvote = async (req, res) => {
     }
 }
 
-const comment = async (req, res) => {
-    try{
-        let question = req.question;
-        question.comments.push(req.body);
 
-        await question.save();
-        res.json(question);
-    } catch(err){
-        return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-        });
-    }
-}
-
-const deleteComment = async (req, res) => {
-    try{
-        let question = req.question;
-        question.comments = question.comments.filter(
-            object => object.userId !== req.body.userId
-        );
-
-        await question.save();
-        res.json(question);
-    } catch(err){
-        return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-        });
-    }
-}
 
 export default {
     create, 
@@ -140,7 +112,5 @@ export default {
     remove, 
     questionByID,
     vote,
-    unvote,
-    comment,
-    deleteComment
+    unvote
 };
