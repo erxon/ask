@@ -31,6 +31,8 @@ const list = async (req, res) => {
 const questionByID = async (req, res, next) => {
     try{
         let findQuestion = await Question.findById(req.params.questionId)
+        .populate("user", "name")
+        .exec();
         if (!findQuestion) {
             return res.status(400).json({
                 error: "Question does not exist"
@@ -48,6 +50,7 @@ const questionByID = async (req, res, next) => {
 const read = (req, res) => {
     return res.json(req.question);
 }
+
 const update = async (req, res) => {
     try{
         let edittedQuestion = req.question;
@@ -61,6 +64,7 @@ const update = async (req, res) => {
         })
     }
 }
+
 const remove = async (req, res) => {
     try{
         let questionToRemove = req.question;
@@ -75,11 +79,10 @@ const remove = async (req, res) => {
 
 const vote = async (req, res) => {
     try{
-        let edittedQuestion = req.question;
-        edittedQuestion.usersVoted.push(req.body.userId);
+        let question = await Question.findByIdAndUpdate(req.body.questionId,
+            {$push: {"usersVoted": req.body.userId}}, {new: true});
         
-        await edittedQuestion.save();
-        res.json(edittedQuestion);
+        res.json(question);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -88,13 +91,10 @@ const vote = async (req, res) => {
 }
 const unvote = async (req, res) => {
     try{
-        let edittedQuestion = req.question;
-        edittedQuestion.usersVoted = edittedQuestion.usersVoted.filter(
-            id => id !== req.body.userId
-        );
+        let question = await Question.findByIdAndUpdate(req.body.questionId,
+            {$pull: {"usersVoted": req.body.userId}}, {new: true});
         
-        await edittedQuestion.save();
-        res.json(edittedQuestion);
+        res.json(question);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)

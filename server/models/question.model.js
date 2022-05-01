@@ -3,9 +3,8 @@ import mongoose from "mongoose";
 const QuestionSchema = new mongoose.Schema({
     questionTitle: String,
     questionBody: String,
-    userId: String,
-    usersVoted: [],
-    comments: [],
+    user: {type: mongoose.Schema.ObjectId, ref: "User"},
+    usersVoted: [{type: mongoose.Schema.ObjectId, ref: "User"}],
     created: {
         type: Date,
         default: Date.now

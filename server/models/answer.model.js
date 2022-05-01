@@ -3,10 +3,9 @@ import mongoose from "mongoose";
 const AnswerSchema = new mongoose.Schema({
     answerTitle: String,
     answerBody: String,
-    userId: String,
-    questionId: String,
-    usersVoted: [],
-    comments: [],
+    user: {type: mongoose.Schema.ObjectId, ref: "User"},
+    questionId: {type: mongoose.Schema.ObjectId, ref: "Question"},
+    usersVoted: [{type: mongoose.Schema.ObjectId, ref: "User"}],
     created: {
         type: Date,
         default: Date.now

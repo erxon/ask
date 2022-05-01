@@ -1,14 +1,26 @@
 import mongoose from "mongoose";
 
 const CommentSchema = new mongoose.Schema({
-    postId: String,
+    postId: {type: mongoose.Schema.ObjectId, ref: "Question"},
     content: String,
-    name: String,
+    user: {type: mongoose.Schema.ObjectId, ref: "User"},
+    likes: [{type: mongoose.Schema.ObjectId, ref: "User"}],
     created: {
         type: Date,
         default: Date.now
     },
     updated: Date
+},
+{
+    toJSON: {virtuals: true}
+}
+);
+
+CommentSchema.virtual("fromAnswers", {
+    ref: "Answer",
+    localField: "postId",
+    foreignField: "_id",
+    justOne: true
 });
 
 const Comment = new mongoose.model("comment", CommentSchema);

@@ -30,7 +30,9 @@ const list = async (req, res) => {
 
 const commentByID = async (req, res, next) => {
     try{
-        let comment = await Comment.findById(req.params.commentId);
+        let comment = await Comment.findById(req.params.commentId)
+        .populate("user", "name")
+        .exec();
         if (!comment) {
             return res.status(400).json({
                 error: "Comment does not exist"
@@ -75,11 +77,34 @@ const remove = async (req, res) => {
     }
 };
 
+const like = async (req, res) => {
+    try{
+      let result = await Comment.findByIdAndUpdate(req.body.commentId, {$push: {likes: req.body.userId}}, {new: true})
+      res.json(result)
+    }catch(err){
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+  
+const unlike = async (req, res) => {
+    try{
+      let result = await Comment.findByIdAndUpdate(req.body.commentId, {$pull: {likes: req.body.userId}}, {new: true})
+      res.json(result)
+    }catch(err){
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+}
 export default {
     create,
     list,
     read,
     edit,
     remove,
-    commentByID
+    commentByID,
+    like,
+    unlike
 };

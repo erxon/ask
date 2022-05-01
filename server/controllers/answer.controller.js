@@ -29,7 +29,9 @@ const list = async (req, res) => {
 
 const answerByID = async (req, res, next) => {
     try{
-        let foundAnswer = await Answer.findById(req.params.answerId);
+        let foundAnswer = await Answer.findById(req.params.answerId)
+        .populate("user", "name")
+        .exec();
         if(!foundAnswer){
             return res.status(400).json({
                 message: "Answer does not exist"
@@ -78,11 +80,14 @@ const remove = async (req, res) => {
 }
 const vote = async (req, res) => {
     try{
-        let answerToEdit = req.answer;
-        answerToEdit.usersVoted.push(req.body.userId);
+        let result = await Answer.findByIdAndUpdate(req.body.answerId, 
+            {$push: { usersVoted: req.body.userId}},
+            {new: true});
+        // let answerToEdit = req.answer;
+        // answerToEdit.usersVoted.push(req.body.userId);
 
-        await answerToEdit.save();
-        res.json(answerToEdit);
+        // await answerToEdit.save();
+        res.json(result);
     } catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -92,14 +97,11 @@ const vote = async (req, res) => {
 
 const unvote = async (req, res) => {
     try{
-        let answerToEdit = req.answer;
-        answerToEdit.usersVoted = answerToEdit.usersVoted.filter(
-            id => id !== req.body.userId
-        );
+        let result = await Answer.findByIdAndUpdate(req.body.answerId,
+            {$pull: {usersVoted: req.body.userId}},
+            {new: true});
 
-        await answerToEdit.save();
-
-        res.json(answerToEdit);
+        res.json(result);
     } catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
