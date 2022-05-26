@@ -1,3 +1,11 @@
+/*
+Color pallete:
+    dark blue: #112B3C
+    orange: #F66B0E
+    blue: #002792, #205375
+    gray: #787878
+    darker gray: #4E4E4E
+*/
 .heading{
     background-color: #112B3C;
 }
@@ -15,7 +23,6 @@
 .input-fields{
     padding: 3% 5%; 
 }
-
 .title{
     color: #fff;
     text-align: center;

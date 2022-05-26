@@ -1,7 +1,12 @@
 import React from "react";
 import pic from "../img/1.jpg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function QuestionInput() {
+    //create a state object question: questionTitle, questionContent
+    //handleChange - to handle changes in the input fields
+    //handleSubmit - save the question object to the database
     return (
         <div class="question-input row">
             <img class="avatar col-4 p-0" src={pic} />
@@ -15,8 +20,9 @@ function QuestionInput() {
             <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ask</h5>
+                        <div class="modal-header" style={{backgroundColor: "#205375", color: "#fff"}}>
+                            <FontAwesomeIcon icon={solid("circle-question")} />
+                            <h5 class="modal-title me-auto ms-2" id="exampleModalLabel">Ask</h5>
                         </div>
                         <div class="modal-body">
                             <div class="row">

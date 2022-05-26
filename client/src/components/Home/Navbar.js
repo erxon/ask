@@ -12,7 +12,7 @@ function Navbar() {
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">
-                            <FontAwesomeIcon icon={solid('house')} /> Home</a>
+                            <FontAwesomeIcon icon={solid("house")} /> Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
