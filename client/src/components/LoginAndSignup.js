@@ -1,18 +1,19 @@
 import React, {useState} from "react";
-import axios from "axios";
+import User from "../user/api-user";
+import {signin} from "../auth/api-auth";
+import { values } from "lodash";
+import auth from "../auth/auth-helper";
 
 export default function LoginAndSignup(){
-    //State - loginInput fillLoginInput
-    //loginInput should contain email and password
-    //handleInput() - fillLoginInput with the input in the form using event
-    //console log the state object
-
     //Login
     /**********************************************/
     const [loginInput, fillLoginInput] = useState({
         email: "",
-        password: ""
+        password: "",
+        error: "",
+        redirectToReferrer: false
     });
+    
     const handleLoginInput = (event) => {
         const {name, value} = event.target;
 
@@ -23,20 +24,23 @@ export default function LoginAndSignup(){
             }
         });
     }
+
     const handleLoginSubmit = () => {
-        axios.post("http://localhost:5000/auth/signin", {
+        const user = {
             email: loginInput.email,
             password: loginInput.password
-        })
-        .then((response) => {
-            console.log(response);
-            
-            window.location = "/home";
-        }).catch (err => {
-            console.log(err);
-            //error page
-        })
-    }
+        };
+        signin(user).then((data) => {
+            if(data.error) {
+                fillLoginInput({...loginInput, error: "", redirectToReferrer: true});
+            } else {
+                auth.authenticate(data, () => {
+                    fillLoginInput({...loginInput, error: "", redirectToReferrer: true})
+                })
+            }
+        }).catch(err => console.log(err));
+        
+    }       
     //Signup
     /**********************************************/
     const [signupInput, fillSignupInput] = useState({
@@ -57,21 +61,17 @@ export default function LoginAndSignup(){
     }
     
     const handleSignupSubmit = () => {
-        axios.post("http://localhost:5000/api/users", {
+        const user = {
             name: signupInput.name,
             email: signupInput.email,
             password: signupInput.password
-        })
-        .then((response) => {
+        }
+        User.create(user).then(response => {
             console.log(response);
-            
-        }).catch (err => {
+        }).catch(err => {
             console.log(err);
-            //error page
-
-        })
+        });
     }
-
     
     
     return(
