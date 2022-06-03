@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../components/Home/Navbar";
-import pic from "../components/img/1.jpg";
+import Navbar from "../Home/Navbar";
+import pic from "../img/1.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 

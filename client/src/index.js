@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles.css";
 import Home from "./components/Home/Home";
-import EditProfile from "./user/EditProfile";
-import LoginAndSignup from './components/LoginAndSignup';
+import EditProfile from "./components/user/EditProfile";
+import LoginAndSignup from "./components/auth/LoginAndSignup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

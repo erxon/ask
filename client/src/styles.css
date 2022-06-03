@@ -40,10 +40,11 @@ Color pallete:
 /*Question Input*/
 /**********************************/
 .avatar{
-    border-radius: 100%;
+    border-radius: 50%;
     width: 50px;
     height: 50px;
     display: inline;
+    object-fit: cover;
 
 }
 .question-input{

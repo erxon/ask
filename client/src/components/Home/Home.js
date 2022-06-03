@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import QuestionInput from "./QuestionInput";
+import PostPreview from "./PostPreview";
 
 function Home(){
     return (
@@ -11,7 +12,7 @@ function Home(){
                 <QuestionInput />
             </div>
             <div class="post">
-                
+                <PostPreview />
             </div>
         </div>
     </div>
