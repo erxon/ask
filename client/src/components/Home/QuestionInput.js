@@ -8,7 +8,7 @@ function QuestionInput() {
     //handleChange - to handle changes in the input fields
     //handleSubmit - save the question object to the database
     return (
-        <div class="question-input row">
+        <div class="question-input row rounded p-3 shadow-sm border">
             <img class="avatar col-4 p-0" src={pic} />
             <input
                 type="text"

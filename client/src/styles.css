@@ -49,7 +49,6 @@ Color pallete:
 }
 .question-input{
     width: 500px;
-    margin: 10px;
 }
 .modal{
     background-color: "#112B3C";
@@ -62,4 +61,30 @@ Color pallete:
 
 .btn:hover, .btn:focus{
     background-color: #dd5800;
+}
+
+/*Post preview*/
+/************************/
+
+.post-preview{
+    width: 500px;
+    margin: 10px;
+}
+.name{
+    font-weight: bold;
+    margin-left: 10px; 
+}
+.time{
+    color: #4E4E4E;
+    font-size: 12px;
+}
+
+.icon{
+    font-size: 18px;
+}
+.icon-button{
+    color: #000;
+}
+.icon-button:hover{
+    color: #F66B0E;
 }

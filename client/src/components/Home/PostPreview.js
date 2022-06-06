@@ -5,13 +5,17 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function PostPreview(){
     return (
-    <div>
-        <div class="user">
-            <img src={pic} alt="" class="avatar" />
-            <p class="name">Sherlock Holmes</p>
-            <p class="time">43 mins</p>
+    <div class="p-3 shadow-sm post-preview rounded border">
+        <div class="user row">
+            <div class="col-1">
+                <img src={pic} alt="" class="avatar" />
+            </div>
+            <div class="col-11 ps-4">
+                <h5 class="lh-1">Sherlock Holmes</h5>
+                <h6 class="text-muted time">5 seconds ago</h6>
+            </div>
         </div>
-        <div class="question-preview">
+        <div class="question-preview mt-4">
             <h4>Lorem ipsum dolor sit amet?</h4>
             <p>
                 Ut enim ad minim veniam, quis nostrud exercitation 
@@ -21,14 +25,23 @@ function PostPreview(){
         </div>
 
         <div class="icon-buttons">
-            <div class="like-button">
-                <FontAwesomeIcon icon={regular("thumbs-up")} />
+            <div class="like-button d-inline me-3">
+                <div class="icon d-inline">
+                    <a class="icon-button" href="#"><FontAwesomeIcon icon={regular("thumbs-up")} /></a>
+                </div>
+                <p class="d-inline text-muted ms-1">24</p>
             </div>
-            <div class="comment-button">
-                <FontAwesomeIcon icon={regular("comment")} />
+            <div class="comment-button d-inline me-3">
+                <div class="icon d-inline">
+                    <a class="icon-button" href="#"><FontAwesomeIcon icon={regular("comment")} /></a>
+                </div>
+                <p class="d-inline text-muted ms-1">12</p>
             </div>
-            <div class="answer-button">
-                <FontAwesomeIcon icon={regular("pen-to-square")} />
+            <div class="answer-button d-inline">
+                <div class="icon d-inline">
+                    <a class="icon-button" href="#"><FontAwesomeIcon icon={regular("pen-to-square")} /></a>
+                </div>
+                <p class="d-inline text-muted ms-1">1</p>
             </div>
         </div>
     </div>
