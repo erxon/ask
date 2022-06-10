@@ -17,7 +17,7 @@ function Navbar(props) {
                                 class={
                                     props.active == "home" ? 
                                     "nav-link active" : "nav-link"
-                                } href="#">
+                                } href="/home">
                             <FontAwesomeIcon icon={solid("house")} /> Home </a>
                         </li>
 
@@ -25,8 +25,16 @@ function Navbar(props) {
                             <a class={
                                     props.active == "profile" ? 
                                     "nav-link active" : "nav-link"
-                            } href="#">
+                            } href="/profile/edit">
                             <FontAwesomeIcon icon={solid("user")} /> Profile </a>
+                        </li>
+
+                        <li>
+                            <a class={
+                                    props.active == "users" ? 
+                                    "nav-link active" : "nav-link"
+                            } href="/users">
+                            <FontAwesomeIcon icon={solid("users")} /> Users </a>
                         </li>
 
                     </ul>

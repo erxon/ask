@@ -8,15 +8,21 @@ function QuestionInput() {
     //handleChange - to handle changes in the input fields
     //handleSubmit - save the question object to the database
     return (
-        <div class="question-input row rounded p-3 shadow-sm border">
-            <img class="avatar col-4 p-0" src={pic} />
-            <input
-                type="text"
-                data-bs-toggle="modal"
-                data-bs-target="#modal"
-                class="w-75 ms-3 form-control col-8"
-                placeholder="what do you want to know about?"
-            />
+        <div class="question-input row rounded p-4 shadow-sm border mx-auto container-fluid">
+            <div class="col-2">
+                <img class="avatar" src={pic} />
+            </div>
+            
+            <div class="col-10">
+                <input
+                    type="text"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal"
+                    class="form-control my-2"
+                    placeholder="what do you want to know about?"
+                />
+            </div>
+            
             <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

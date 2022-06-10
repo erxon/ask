@@ -5,13 +5,13 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function PostPreview(){
     return (
-    <div class="p-3 shadow-sm post-preview rounded border">
+    <div class="p-4 shadow-sm post-preview rounded border mx-auto container-fluid">
         <div class="user row">
-            <div class="col-1">
+            <div class="col-2 px-4">
                 <img src={pic} alt="" class="avatar" />
             </div>
-            <div class="col-11 ps-4">
-                <h5 class="lh-1">Sherlock Holmes</h5>
+            <div class="col-10">
+                <h5>Sherlock Holmes</h5>
                 <h6 class="text-muted time">5 seconds ago</h6>
             </div>
         </div>

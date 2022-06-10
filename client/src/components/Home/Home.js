@@ -7,8 +7,8 @@ function Home(){
     return (
     <div>
         <Navbar active="home"/>
-        <div class="row">
-            <div class="m-5 p-2 col-7">
+        <div>
+            <div>
                 <div class="m-4">
                     <QuestionInput />
                 </div>
@@ -16,7 +16,13 @@ function Home(){
                     <PostPreview />
                 </div>
             </div>
+            {/* <div class="col-lg-4 users-section">
+                <Users />
+            </div> */}
         </div>
+        {/* <div class="collapse" id="usersCollapse">
+            <Users />
+        </div> */}
     </div>
     );
 }

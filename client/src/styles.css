@@ -6,6 +6,10 @@ Color pallete:
     gray: #787878
     darker gray: #4E4E4E
 */
+a{
+    text-decoration: none;
+    font-size: 14px;
+}
 .heading{
     background-color: #112B3C;
 }
@@ -87,4 +91,19 @@ Color pallete:
 }
 .icon-button:hover{
     color: #F66B0E;
+}
+
+/*Users*/
+/************************/
+.head{
+    padding: 3% 5%;
+}
+.user-list {
+    padding: 3% 5%;
+}
+
+@media (max-width: 990px){
+    .user{
+        margin-bottom: 20px;
+    }
 }
