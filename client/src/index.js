@@ -6,7 +6,8 @@ import Home from "./components/Home/Home";
 import EditProfile from "./components/user/EditProfile";
 import LoginAndSignup from "./components/auth/LoginAndSignup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Users from './components/user/Users';
+import Users from './components/user/UsersList';
+import PostDetailed from './components/post/PostDetailed';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,7 @@ root.render(
         <Route path="/home" element={<Home />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/post" element={<PostDetailed />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -102,6 +102,48 @@ a{
     padding: 3% 5%;
 }
 
+/*Post expanded*/
+/************************/
+
+.post-detailed{
+    width: 500px;
+    margin: 20px 10px 0 10px;
+}
+.comment-section{
+    width: 500px;
+    margin: 10px auto;
+    
+}
+.send-icon{
+    font-size: 18px;
+}
+.send-icon:hover{
+    color: #F66B0E;
+    cursor: pointer;
+}
+
+/*Comments*/
+.comment-thread{
+    width: 400px;
+    margin: 20px 10px 0 10px;
+}
+.comment-content{
+    font-size: 14px;
+}
+.thumbs-up{
+    display: inline;
+}
+.reply{
+    display: inline;
+    margin-left: 12px;
+}
+.thumbs-up:hover, .reply:hover{
+    color: #F66B0E;
+    cursor: pointer;
+}
+/*Media queries*/
+/************************/
+
 @media (max-width: 990px){
     .user{
         margin-bottom: 20px;

@@ -33,7 +33,7 @@ function PostPreview(){
             </div>
             <div class="comment-button d-inline me-3">
                 <div class="icon d-inline">
-                    <a class="icon-button" href="#"><FontAwesomeIcon icon={regular("comment")} /></a>
+                    <a class="icon-button" href="/post"><FontAwesomeIcon icon={regular("comment")} /></a>
                 </div>
                 <p class="d-inline text-muted ms-1">12</p>
             </div>
