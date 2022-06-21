@@ -166,6 +166,9 @@ p{
 .post{
     padding: 3rem;
 }
+.single-answer{
+    width: 500px;
+}
 .answers{
     padding: 3rem;
 }

@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Users from './components/user/UsersList';
 import PostDetailed from './components/post/PostDetailed';
 import PostWithAnswers from './components/answers/PostWithAnswers';
+import AnswerWithComments from './components/answers/AnswerWithComments';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
         <Route path="/users" element={<Users />} />
         <Route path="/post" element={<PostDetailed />} />
         <Route path="/post/answers" element={<PostWithAnswers />} />
+        <Route path="/post/answers/comments" element={<AnswerWithComments />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
