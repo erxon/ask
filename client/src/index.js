@@ -8,6 +8,7 @@ import LoginAndSignup from "./components/auth/LoginAndSignup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Users from './components/user/UsersList';
 import PostDetailed from './components/post/PostDetailed';
+import PostWithAnswers from './components/answers/PostWithAnswers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/users" element={<Users />} />
         <Route path="/post" element={<PostDetailed />} />
+        <Route path="/post/answers" element={<PostWithAnswers />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

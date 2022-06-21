@@ -33,6 +33,11 @@ a{
     padding: 3% 5%;
     font-size: 3.5rem;
 }
+
+.modal-header{
+    background-color: #205375;
+    color: #fff;
+}
 /**********************************/
 .navbar{
     background-color:#205375;
@@ -141,11 +146,62 @@ a{
     color: #F66B0E;
     cursor: pointer;
 }
+/*Post with answers*/
+p{
+    color: #4E4E4E;
+}
+.user-details{
+    width: 500px;
+}
+.user-details h6{
+    margin-bottom: 2px;
+}
+.question{
+    margin-top: 20px;
+    width: 75%;
+}
+.answer-input{
+    width: 75%;
+}
+.post{
+    padding: 3rem;
+}
+.answers{
+    padding: 3rem;
+}
+.answers-heading{
+    background-color: #112B3C;
+    color: #fff;
+    padding: 2% 3%;
+}
+.answer-content{
+    padding: 5%;
+}
+.answer-field{
+    width: 300px;
+}
+.answer-icons{
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
 /*Media queries*/
 /************************/
 
 @media (max-width: 990px){
     .user{
         margin-bottom: 20px;
+    }
+    
+}
+@media  (min-width: 990px) and (max-width: 1180px){
+    .answer-field{
+        margin-left: 10px;
+        width: 200px;
+    }
+}
+@media (max-width: 600px){
+    .answer-field{
+        margin-left: 20px;
+        width: 200px;
     }
 }
