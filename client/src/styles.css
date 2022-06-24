@@ -65,11 +65,13 @@ a{
 
 .btn{
     background-color: #F66B0E;
+    color: #fff;
     border: 0;
 }
 
 .btn:hover, .btn:focus{
     background-color: #dd5800;
+    color: #fff;
 }
 
 /*Post preview*/
@@ -186,6 +188,42 @@ p{
 .answer-icons{
     padding-left: 5%;
     padding-bottom: 5%;
+}
+/*Profile*/
+/************************/
+.center{
+    text-align: center;
+}
+.profile{
+    padding: 3% 5%;
+    margin: 5% 7%;
+}
+.user-info{
+    margin-top: 20px;
+}
+.date{
+    font-size: 12px;
+}
+.about{
+    color: #000;
+}
+.tabs{
+    margin-top: 50px;
+}
+.following{
+    width: 45%;
+}
+/*Posted question*/
+.posted-question{
+    background-color: #b4b4b4;
+    padding: 2% 3%;
+}
+.edit-profile-icon{
+    color: #000;
+}
+.edit-profile-icon:hover{
+    color: #F66B0E;
+    cursor: pointer;
 }
 /*Media queries*/
 /************************/

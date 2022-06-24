@@ -48,6 +48,7 @@ function Users() {
                                 name={user.name}
                                 timeJoined={user.timeJoined}
                                 about={user.about}
+                                customStyle="col-lg-4 col-md-6"
                             />
                         })
                     }

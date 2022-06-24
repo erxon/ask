@@ -10,7 +10,8 @@ import Users from './components/user/UsersList';
 import PostDetailed from './components/post/PostDetailed';
 import PostWithAnswers from './components/answers/PostWithAnswers';
 import AnswerWithComments from './components/answers/AnswerWithComments';
-
+import Profile
+ from './components/user/Profile';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   //route for the login & signup page
@@ -22,6 +23,7 @@ root.render(
       <Routes>
         <Route path="/" element={<LoginAndSignup />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/users" element={<Users />} />
         <Route path="/post" element={<PostDetailed />} />
