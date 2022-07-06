@@ -147,35 +147,11 @@ function EditProfile() {
                             onChange={handleChange("about")}
                             value={values.about} />
                     </div>
+                    <label htmlFor="password" className="form-label mt-3">Password</label>
+                    <input type="password" onChange={handleChange("password")} className="form-control" placeholder="New password" />
                 </div>
-                <button
-                    type="button"
-                    className="bg-transparent btn btn-link mt-3 d-block mx-auto text-decoration-none"
-                    data-bs-toggle="modal"
-                    data-bs-target="#changePassword"
-                >
-                    Change password
-                </button>
                 <button className="d-block mx-auto mt-4 btn btn-dark" onClick={handleSubmit}>Save</button>
 
-            </div>
-
-            <div className="modal fade" id="changePassword" tabindex="-1">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div style={{ backgroundColor: "#205375", color: "#fff" }} className="modal-header">
-                            <FontAwesomeIcon icon={solid("key")} />
-                            <h5 className="modal-title me-auto ms-2">Change password</h5>
-                        </div>
-                        <div className="modal-body">
-                            <input type="password" className="form-control" placeholder="Current password" />
-                            <input type="password" onChange={handleChange("password")} className="mt-3 form-control" placeholder="New password" />
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary me-auto">Save</button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
 
