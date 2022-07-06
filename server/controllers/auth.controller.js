@@ -23,7 +23,8 @@ const signin = async (req, res) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email
-            }
+            },
+            error:""
         })
     } catch (err) {
         return res.status("401").json({error: "Could not sign in"})

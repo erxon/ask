@@ -23,6 +23,7 @@ app.use(compress());
 app.use(helmet());
 app.use(cors());
 
+
 app.use("/dist", express.static(path.join(CURRENT_WORKING_DIR, "dist")));
 
 app.use("/", userRoutes);
@@ -30,10 +31,6 @@ app.use("/", authRoutes);
 app.use("/", questionRoutes);
 app.use("/", answerRoutes);
 app.use("/", commentRoutes);
-
-app.get("/", (req, res) => {
-    res.status(200).send(Template());
-});
 
 app.use((err, req, res, next) => {
     if (err.name === "UnauthorizedError"){
@@ -43,5 +40,7 @@ app.use((err, req, res, next) => {
         console.log(err);
     }
 });
+
+
 
 export default app;

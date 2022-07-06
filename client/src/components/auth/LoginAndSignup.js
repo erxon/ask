@@ -1,19 +1,26 @@
 import React, {useState} from "react";
-import User from "../user/api-user";
+import {create} from "../user/api-user";
 import {signin} from "../auth/api-auth";
-// import { values } from "lodash";
 import auth from "../auth/auth-helper";
 
 export default function LoginAndSignup(){
-    //Login
-    /**********************************************/
+    
     const [loginInput, fillLoginInput] = useState({
         email: "",
         password: "",
         error: "",
         redirectToReferrer: false
     });
-    
+    const [signupInput, fillSignupInput] = useState({
+        name: "",
+        email: "",
+        password: "",
+        open: false,
+        error: ""
+    });
+
+    //Login
+    /**********************************************/
     const handleLoginInput = (event) => {
         const {name, value} = event.target;
 
@@ -23,32 +30,36 @@ export default function LoginAndSignup(){
                 [name]: value
             }
         });
-    }
+    };
 
-    const handleLoginSubmit = () => {
+    const handleLoginSubmit = (event) => {
+        event.preventDefault();
+
         const user = {
             email: loginInput.email,
             password: loginInput.password
         };
-        signin(user).then((data) => {
+
+        signin(user).then((response) => {
+            const data = response.data
             if(data.error) {
-                fillLoginInput({...loginInput, error: "", redirectToReferrer: true});
+                fillLoginInput({...loginInput, error: data.error});
             } else {
                 auth.authenticate(data, () => {
-                    fillLoginInput({...loginInput, error: "", redirectToReferrer: true})
-                })
+                    fillLoginInput({...loginInput, error: ""});
+                });
+
+                window.location = "/home";
             }
+            
         }).catch(err => console.log(err));
         
-    }       
+    };
+   
+
     //Signup
     /**********************************************/
-    const [signupInput, fillSignupInput] = useState({
-        name: "",
-        email: "",
-        password: ""
-    });
-    
+
     const handleSignupInput  = (event) => {
         const {name, value} = event.target;
 
@@ -58,7 +69,7 @@ export default function LoginAndSignup(){
                 [name]: value
             }
         });
-    }
+    };
     
     const handleSignupSubmit = () => {
         const user = {
@@ -66,13 +77,12 @@ export default function LoginAndSignup(){
             email: signupInput.email,
             password: signupInput.password
         }
-        User.create(user).then(response => {
+        create(user).then(response => {
             console.log(response);
         }).catch(err => {
             console.log(err);
         });
-    }
-    
+    };
     
     return(
     <div style={{backgroundColor: "#205375", height: "50rem"}}>

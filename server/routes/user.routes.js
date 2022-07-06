@@ -10,8 +10,10 @@ router.route("/api/users")
 
 
 
-router.route("/api/users/photo/:userId")
-    .get(userCtrl.photo);
+router.route('/api/users/photo/:userId')
+    .get(userCtrl.photo, userCtrl.defaultPhoto);
+router.route('/api/users/defaultPhoto')
+    .get(userCtrl.defaultPhoto);
 
 router.route("/api/users/follow")
     .put(authCtrl.requireSignin, userCtrl.addFollowing, userCtrl.addFollower);
@@ -24,9 +26,8 @@ router.route("/api/users/:userId")
     .get(authCtrl.requireSignin, userCtrl.read)
     .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
     .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
-//userCtrl.photo, userCtrl.defaultPhoto
-// router.route("/api/users/defaultphoto")
-//     .get(userCtrl.defaultPhoto);
+
+
 
    
 router.param("userId", userCtrl.userByID);

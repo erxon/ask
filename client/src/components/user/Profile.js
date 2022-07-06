@@ -1,20 +1,22 @@
 import React from "react";
 import Navbar from "../Home/Navbar";
 import Avatar from "./Avatar";
-import mark from "../img/1.jpg"
 import sherlock from "../img/2.jpg";
 import User from "./User";
 import PostedQuestion from "./PostedQuestion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import {useParams} from "react-router-dom";
 
 function Profile() {
+    const {userId} = useParams();
+    const photoUrl = userId ? `/api/users/photo/${userId}?${new Date().getTime()}` : "/api/users/defaultPhoto";
     return (
         <div>
             <Navbar />
             <div class="profile border shadow-sm">
                 <div class="center">
-                    <Avatar picture={mark} />
+                    <Avatar picture={photoUrl} />
                 </div>
                 <div class="center user-info">
                     <h3>Mark Vonkovitch</h3>

@@ -1,82 +1,178 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Home/Navbar";
-import pic from "../img/1.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import auth from "../auth/auth-helper";
+import {read, update} from "./api-user";
+import { useParams, Navigate } from "react-router-dom";
+import ProfilePhoto from "./ProfilePhoto";
 
 function EditProfile() {
+    //State object
+    const [values, setValues] = useState({
+        name: "",
+        about: "",
+        photoContentType: "",
+        password: "",
+        email: "",
+        error:"",
+        redirectToProfile: false,
+        id: ""
+    });
+
+    //Check if user is authenticated
+    const jwt = auth.isAuthenticated();
+
+    //Get userId from url param
+    const {userId} = useParams();
+
+    //Get request to the server using useEffect
+    useEffect(() => {
+        read({userId}, {t: jwt.token}).then((response) => {
+            const data = response.data;
+            console.log(data);
+            if(data && data.error){
+                setValues({...values, error: data.error});
+            } else{
+                console.log(data.photo);
+                setValues({
+                    ...values, 
+                    id: data._id, 
+                    name: data.name, 
+                    email: data.email, 
+                    about: data.about
+                });
+
+            }
+        });
+    }, [userId]);
+
+
+
+    //Handle changes from the input fields
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        //Instantiate FormData object
+        let userData = new FormData();
+        console.log(values);
+
+        //Save key value pairs in the userData object
+        values.name && userData.append("name", values.name);
+        values.email && userData.append("email", values.email);
+        values.password && userData.append("password", values.password);
+        values.about && userData.append("about", values.about);
+        values.photo && userData.append("photo", values.photo);
+        
+        //PUT request to the server
+        update({userId: values.id}, {t: jwt.token}, userData).then((response) => {
+            console.log("This is Update function")
+            const data = response;
+            console.log(response);
+            
+            if(data && data.error){
+                setValues({...values, error: data.error})
+            } else {
+                setValues({...values, redirectToProfile: true});
+            }
+        }).catch(err => console.log(err));
+    }
+    
+    const handleChange = name => event => {
+        const value = name === "photo" ? 
+        event.target.files[0] : event.target.value;
+        setValues({...values, [name]: value});
+    }
+    // GET user's profile photo
+    // const photoUrl = values.id ? `/api/users/photo/${values.id}?${new Date().getTime()}` : '/api/users/defaultPhoto';
+    // console.log(photoUrl);
+    
+    console.log(values);
+    if(values.redirectToProfile){
+        return( <Navigate to={"/user/"+values.id} /> );
+    }
     return (
         <div>
             <Navbar active="profile" />
             <div>
                 {/*Display image*/}
-                <img
-                    src={pic}
-                    class="rounded-circle mx-auto d-block mt-4"
-                    style={{ width: "100px", height: "100px" }}
-                    alt="" />
-                <a
-                    class="mt-3 d-block text-center text-decoration-none"
-                    href="#">
-                    Change profile picture
-                </a>
+                <div className="text-center mt-3">
+                    <ProfilePhoto 
+                        userId={userId}
+                        customStyle={{width: "100px", height: "100px"}}
+                    />
+                </div>
+                
+                <div className="text-center mt-3">
+                    <input
+                        accept="image/*"
+                        type="file"
+                        name="photo"
+                        onChange={handleChange("photo")}
+                    />
+                    
+                    
 
-                <div class="mx-auto p-3 w-50">
-                    <div class="mt-3">
-                        <label for="name" class="form-label">Name</label>
+                </div>
+
+                <div className="mx-auto p-3 w-50">
+                    <div className="mt-3">
+                        <label for="name" className="form-label">Name</label>
                         <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             id="name"
                             name="name"
-                            value="Mark Vonkovitch" />
+                            onChange={handleChange("name")}
+                            value={values.name} />
 
                     </div>
 
-                    <div class="mt-3">
-                        <label for="email" class="form-label">Email</label>
+                    <div className="mt-3">
+                        <label for="email" className="form-label">Email</label>
                         <input
-                            class="form-control"
+                            className="form-control"
                             type="email"
                             id="email"
                             name="email"
-                            value="mark@vonko.info" />
+                            onChange={handleChange("email")}
+                            value={values.email} />
                     </div>
 
-                    <div class="mt-3">
-                        <label for="about" class="form-label">About me</label>
+                    <div className="mt-3">
+                        <label for="about" className="form-label">About me</label>
                         <textarea
-                            class="form-control"
+                            className="form-control"
                             id="about"
                             name="about"
-                            value="freelancer" />
+                            onChange={handleChange("about")}
+                            value={values.about} />
                     </div>
                 </div>
                 <button
                     type="button"
-                    class="bg-transparent btn btn-link mt-3 d-block mx-auto text-decoration-none"
-                    data-bs-toggle="modal" 
+                    className="bg-transparent btn btn-link mt-3 d-block mx-auto text-decoration-none"
+                    data-bs-toggle="modal"
                     data-bs-target="#changePassword"
-                    >
+                >
                     Change password
                 </button>
-                <button class="d-block mx-auto mt-4 btn btn-dark">Save</button>
+                <button className="d-block mx-auto mt-4 btn btn-dark" onClick={handleSubmit}>Save</button>
 
             </div>
 
-            <div class="modal fade" id="changePassword" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div style={{backgroundColor: "#205375", color: "#fff"}} class="modal-header">
+            <div className="modal fade" id="changePassword" tabindex="-1">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div style={{ backgroundColor: "#205375", color: "#fff" }} className="modal-header">
                             <FontAwesomeIcon icon={solid("key")} />
-                            <h5 class="modal-title me-auto ms-2">Change password</h5>
+                            <h5 className="modal-title me-auto ms-2">Change password</h5>
                         </div>
-                        <div class="modal-body">
-                            <input type="password" class="form-control" placeholder="Current password"/>
-                            <input type="password" class="mt-3 form-control" placeholder="New password"/>
+                        <div className="modal-body">
+                            <input type="password" className="form-control" placeholder="Current password" />
+                            <input type="password" onChange={handleChange("password")} className="mt-3 form-control" placeholder="New password" />
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary me-auto">Save</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary me-auto">Save</button>
                         </div>
                     </div>
                 </div>

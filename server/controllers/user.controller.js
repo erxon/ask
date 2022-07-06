@@ -3,6 +3,7 @@ import extend from "lodash/extend";
 import errorHandler from "../helpers/dbErrorHandler";
 import formidable from "formidable";
 import fs from "fs";
+import profileImage from "./../../client/src/components/img/profile-pic.png";
 
 const create = async (req, res) => {
     
@@ -57,7 +58,7 @@ const read = (req, res) => {
     return res.json(req.profile);
 };
 
-const update = async (req, res) => {
+const update = (req, res) => {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
     form.parse(req, async (err, fields, files) =>{
@@ -70,15 +71,15 @@ const update = async (req, res) => {
         user = extend(user, fields);
         user.updated = Date.now();
         if(files.photo) {
-            user.photo.data = fs.readFileSync(files.photo.path);
-            user.photo.contentType = files.photo.type;
+            user.photo.data = fs.readFileSync(files.photo.filepath);
+            user.photo.contentType = files.photo.mimetype;
         }
         try{
             await user.save();
             user.hashed_password = undefined;
             user.salt = undefined;
             res.json(user);
-        } catch (err){
+        } catch (err) {
             return res.status(400).json({
                 error: errorHandler.getErrorMessage(err)
             });
@@ -102,11 +103,15 @@ const remove = async (req, res) => {
 
 const photo = (req, res, next) => {
     if(req.profile.photo.data){
-    res.set("Content-Type", req.profile.photo.contentType)
-    return res.send(req.profile.photo.data)
+        res.set("Content-Type", req.profile.photo.contentType);
+        res.send(req.profile.photo.data);
     }
     next();
 };
+
+const defaultPhoto = (req, res) => {
+    return res.sendFile(process.cwd() + profileImage);
+}
 
 const addFollowing = async (req, res, next) => {
     
@@ -183,6 +188,7 @@ export default {
     remove, 
     update, 
     photo,
+    defaultPhoto,
     addFollower,
     addFollowing,
     removeFollower,

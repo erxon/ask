@@ -63,13 +63,13 @@ a{
     background-color: "#112B3C";
 }
 
-.btn{
+.btn-custom{
     background-color: #F66B0E;
     color: #fff;
     border: 0;
 }
 
-.btn:hover, .btn:focus{
+.btn-custom:hover, .btn-custom:focus{
     background-color: #dd5800;
     color: #fff;
 }
