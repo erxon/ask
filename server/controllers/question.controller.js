@@ -1,6 +1,7 @@
 import Question from "../models/question.model";
 import errorHandler from "../helpers/dbErrorHandler";
 import extend from "lodash/extend";
+
 const create = async (req, res) => {
     const question = new Question(req.body);
 

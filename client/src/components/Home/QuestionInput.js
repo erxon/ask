@@ -1,16 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pic from "../img/1.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro';
+import {useParams} from "react-router-dom";
+import {postQuestion} from "./api-question";
+import ProfilePhoto from "../user/ProfilePhoto";
 
-function QuestionInput() {
+
+function QuestionInput(props) {
     //create a state object question: questionTitle, questionContent
     //handleChange - to handle changes in the input fields
     //handleSubmit - save the question object to the database
+    const [values, setValues] = useState({
+        questionTitle: "",
+        questionBody: "",
+        response: "",
+        userId: "",
+        refresh: false
+    });
+
+    const {userId} = useParams();
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+
+        setValues((prevValue) => {return {...prevValue, [name]: value}});
+    }
+
+    const handleSubmit = () => {
+        const question = {
+            questionTitle: values.questionTitle,
+            questionBody: values.questionBody,
+            userId: userId
+        }
+        postQuestion(question, {t: props.token})
+        .then((response) => {
+            setValues({...values, response: response.data.message});
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     return (
         <div class="question-input row rounded p-4 shadow-sm border mx-auto container-fluid">
             <div class="col-2">
-                <img class="avatar" src={pic} />
+                <ProfilePhoto userId={userId} />
             </div>
             
             <div class="col-10">
@@ -32,23 +66,26 @@ function QuestionInput() {
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <img class="avatar col-4 p-0 ms-4" src={pic} />
                                 <input 
                                     type="text" 
                                     name="questionTitle" 
                                     placeholder="Question" 
-                                    class="form-control col-8 w-75 ms-4" 
+                                    class="form-control w-75 ms-2" 
+                                    onChange={handleChange}
+                                    value={values.questionTitle}
                                 />
                             </div>
                             <textarea 
                                 type="text" 
-                                name="questionContent" 
+                                name="questionBody" 
                                 placeholder="Description" 
                                 class="form-control mt-3" 
+                                onChange={handleChange}
+                                value={values.questionBody}
                             />
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-dark me-auto">Post</button>
+                            <button type="submit" class="btn btn-dark me-auto" onClick={handleSubmit}>Post</button>
                         </div>
                     </div>
                 </div>

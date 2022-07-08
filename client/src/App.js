@@ -10,7 +10,6 @@ import PostDetailed from "./components/post/PostDetailed";
 import PostWithAnswers from "./components/answers/PostWithAnswers";
 import AnswerWithComments from "./components/answers/AnswerWithComments";
 import Profile from "./components/user/Profile";
-import ProfilePhoto from "./components/user/ProfilePhoto";
 
 function App() {
   return (
@@ -18,14 +17,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginAndSignup />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home/:userId" location="/" element={<Home />} />
           <Route path="/user/:userId" element={<Profile />} />
           <Route path="/user/edit/:userId" element={<EditProfile />} />
           <Route path="/users" element={<Users />} />
           <Route path="/post" element={<PostDetailed />} />
           <Route path="/post/answers" element={<PostWithAnswers />} />
           <Route path="/post/answers/comments" element={<AnswerWithComments />} />
-          <Route path="/profilephoto" element={<ProfilePhoto />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

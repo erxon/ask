@@ -2,21 +2,22 @@ import React, {useState} from "react";
 import {create} from "../user/api-user";
 import {signin} from "../auth/api-auth";
 import auth from "../auth/auth-helper";
+import { Navigate } from "react-router-dom";
 
 export default function LoginAndSignup(){
-    
+    const [id, setId] = useState("");
     const [loginInput, fillLoginInput] = useState({
         email: "",
         password: "",
         error: "",
-        redirectToReferrer: false
+        redirectToHome: false
     });
     const [signupInput, fillSignupInput] = useState({
         name: "",
         email: "",
         password: "",
-        open: false,
-        error: ""
+        error: "",
+        redirectToEditProfile: false
     });
 
     //Login
@@ -46,10 +47,12 @@ export default function LoginAndSignup(){
                 fillLoginInput({...loginInput, error: data.error});
             } else {
                 auth.authenticate(data, () => {
-                    fillLoginInput({...loginInput, error: ""});
+                    fillLoginInput({...loginInput, error: "", redirectToHome: true});
+                    setId(data.user._id);
                 });
 
-                window.location = "/home";
+                
+
             }
             
         }).catch(err => console.log(err));
@@ -79,11 +82,28 @@ export default function LoginAndSignup(){
         }
         create(user).then(response => {
             console.log(response);
+            signin({email: user.email, password: user.password}).then((response) => {
+                const data = response.data
+                if(data.error) {
+                    fillSignupInput({...signupInput, error: data.error});
+                } else {
+                    auth.authenticate(data, () => {
+                        fillSignupInput({...signupInput, error: "", redirectToEditProfile: true});
+                        setId(data.user._id);
+                    });
+                }
+                
+            }).catch(err => console.log(err));
         }).catch(err => {
             console.log(err);
         });
     };
-    
+    if(loginInput.redirectToHome){
+        return (<Navigate to={"/home/"+id} />);
+    }
+    if(signupInput.redirectToEditProfile){
+        return (<Navigate to={"/user/edit/"+id} />);
+    }
     return(
     <div style={{backgroundColor: "#205375", height: "50rem"}}>
         <h1 className="title">ASK</h1>
