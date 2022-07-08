@@ -1,25 +1,43 @@
 import React, { useEffect, useState } from "react";
-import pic from "../img/1.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro';
 import {useParams} from "react-router-dom";
 import {postQuestion} from "./api-question";
 import ProfilePhoto from "../user/ProfilePhoto";
-
+import {read} from "../user/api-user";
 
 function QuestionInput(props) {
     //create a state object question: questionTitle, questionContent
     //handleChange - to handle changes in the input fields
     //handleSubmit - save the question object to the database
+    //Get request to the server for the user info
+
+    const {userId} = useParams();
+
     const [values, setValues] = useState({
         questionTitle: "",
         questionBody: "",
         response: "",
         userId: "",
+        userName: "",
         refresh: false
     });
 
-    const {userId} = useParams();
+    useEffect(() => {
+        read({userId: userId}, {t: props.token})
+        .then(response => {
+            setValues({...values, 
+                userId: userId, 
+                userName: response.data.name
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
+    
+
+    
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -31,7 +49,8 @@ function QuestionInput(props) {
         const question = {
             questionTitle: values.questionTitle,
             questionBody: values.questionBody,
-            userId: userId
+            userId: userId,
+            userName: values.userName
         }
         postQuestion(question, {t: props.token})
         .then((response) => {
