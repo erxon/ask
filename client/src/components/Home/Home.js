@@ -13,6 +13,7 @@ function Home() {
     //Get request to the server for the user information 
     //Map the list of questions to the PostPreview
     //In the PostPreview, limit the post content into 300 characters
+    //In the PostPreview, show the user's profile photo using ProfilePhoto component
 
     //Make the home component a public route
     //If the user is not yet authenticated, display in the navbar the sign in or sign up button
@@ -22,7 +23,10 @@ function Home() {
     const {userId} = useParams();
 
     const [values, setValues] = useState({
-
+        questionTitle: "",
+        questionContent: "",
+        user: "",
+        datePosted: ""
     });
 
     useEffect(() => {
