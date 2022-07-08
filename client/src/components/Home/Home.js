@@ -12,7 +12,6 @@ function Home() {
     //(done)State object that will contain question title, content and the user who posted it
     //(done) Get request to the server for the question list
         //Map each question details to the values array
-    //Get request to the server for the user information 
     //Map the list of questions to the PostPreview
     //In the PostPreview, limit the post content into 300 characters
     //In the PostPreview, show the user's profile photo using ProfilePhoto component
@@ -28,18 +27,20 @@ function Home() {
         questionTitle: "",
         questionBody: "",
         user: "",
-        datePosted: ""
+        datePosted: "",
+        postId: ""
     }]);
     //Listing questions
     useEffect(() => {
         questions().then(response => {
             const data = response.data;
-            console.log(data);
             let questions = data.map((question) => {
                 return {
                     questionTitle: question.questionTitle,
                     questionBody: question.questionBody,
-                    datePosted: question.created
+                    datePosted: question.created,
+                    user: question.userName,
+                    postId: question._id
                 }
             });
             setValues(questions);
@@ -48,23 +49,6 @@ function Home() {
             console.log(err);
         })
     }, []);
-
-    //Get request to the server for the user info
-    // useEffect(() => {
-    //     //require read in api-user
-    //     //call read function
-    //     read({userId: userId}, {t: credentials.token})
-    //     .then((response) => {
-    //         const data = response.data;
-
-    //         setValues({...values, userName: data.name});
-
-    //         console.log(values);
-    //     }).catch(err => {
-    //         console.log(err);
-    //     })
-    // }, []);
-
 
     if (!credentials) {
         return (<Navigate to={"/"} />);
@@ -81,7 +65,19 @@ function Home() {
                         <QuestionInput token={credentials.token} />
                     </div>
                     <div class="post">
-                        <PostPreview />
+                        {
+                            values.map((question) => {
+                                {<PostPreview
+                                    body={question.questionBody}
+                                    title={question.questionTitle}
+                                    user={question.user}
+                                    date={question.datePosted}
+                                    userId={userId}
+                                    postId={question.postId}
+                                 /> }
+                            })
+                        }
+                        
                     </div>
                 </div>
                 {/* <div class="col-lg-4 users-section">
