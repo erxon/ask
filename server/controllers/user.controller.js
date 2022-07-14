@@ -104,7 +104,7 @@ const remove = async (req, res) => {
 const photo = (req, res, next) => {
     if(req.profile.photo.data){
         res.set("Content-Type", req.profile.photo.contentType);
-        res.send(req.profile.photo.data);
+        return res.send(req.profile.photo.data);
     }
     next();
 };

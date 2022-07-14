@@ -20,7 +20,7 @@ const create = async (req, res) => {
 const list = async (req, res) => {
     try{
         let questions = await Question.find();
-        res.json(questions);
+        return res.json(questions);
     } catch (err) {
         return res.status(400).res.json({
             error: errorHandler.getErrorMessage(err)
@@ -58,7 +58,7 @@ const update = async (req, res) => {
         edittedQuestion = extend(edittedQuestion, req.body);
         edittedQuestion.updated = Date.now();
         await edittedQuestion.save();
-        res.json(edittedQuestion);
+        return res.json(edittedQuestion);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -70,7 +70,7 @@ const remove = async (req, res) => {
     try{
         let questionToRemove = req.question;
         let removedQuestion = await questionToRemove.remove();
-        res.json(removedQuestion)
+        return res.json(removedQuestion)
     } catch (err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -83,7 +83,7 @@ const vote = async (req, res) => {
         let question = await Question.findByIdAndUpdate(req.body.questionId,
             {$push: {"usersVoted": req.body.userId}}, {new: true});
         
-        res.json(question);
+        return res.json(question);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -95,7 +95,7 @@ const unvote = async (req, res) => {
         let question = await Question.findByIdAndUpdate(req.body.questionId,
             {$pull: {"usersVoted": req.body.userId}}, {new: true});
         
-        res.json(question);
+        return res.json(question);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)

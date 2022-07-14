@@ -5,7 +5,6 @@ import PostPreview from "./PostPreview";
 import auth from "../auth/auth-helper";
 import { Navigate, useParams } from "react-router-dom";
 import {questions} from "./api-question";
-import {read} from "../user/api-user";
 
 function Home() {
     //List questions
@@ -22,34 +21,17 @@ function Home() {
 
     const credentials = auth.isAuthenticated();
     const {userId} = useParams();
-
-    const [values, setValues] = useState([{
-        questionTitle: "",
-        questionBody: "",
-        user: "",
-        datePosted: "",
-        postId: ""
-    }]);
+    
+    const [values, setValues] = useState([]);
     //Listing questions
     useEffect(() => {
-        questions().then(response => {
-            const data = response.data;
-            let questions = data.map((question) => {
-                return {
-                    questionTitle: question.questionTitle,
-                    questionBody: question.questionBody,
-                    datePosted: question.created,
-                    user: question.userName,
-                    postId: question._id
-                }
-            });
-            setValues(questions);
-            console.log(values);
-        }).catch(err => {
-            console.log(err);
+        questions()
+        .then((response) => {
+            let data = response.data;
+            setValues([...data]);
         })
     }, []);
-
+    console.log(values);
     if (!credentials) {
         return (<Navigate to={"/"} />);
     }
@@ -67,26 +49,25 @@ function Home() {
                     <div class="post">
                         {
                             values.map((question) => {
-                                {<PostPreview
+                              return (
+                                <PostPreview
+                                    key={question.postId}
                                     body={question.questionBody}
                                     title={question.questionTitle}
-                                    user={question.user}
-                                    date={question.datePosted}
+                                    user={question.userName}
+                                    date={question.created}
                                     userId={userId}
-                                    postId={question.postId}
-                                 /> }
+                                    id={question.postId}
+                                 />
+                              )
                             })
                         }
                         
                     </div>
                 </div>
-                {/* <div class="col-lg-4 users-section">
-                        <Users />
-                    </div> */}
+                
             </div>
-            {/* <div class="collapse" id="usersCollapse">
-                    <Users />
-                </div> */}
+            
         </div>
     );
 }

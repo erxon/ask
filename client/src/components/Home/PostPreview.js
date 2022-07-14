@@ -3,7 +3,7 @@ import pic from "../img/2.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function PostPreview(){
+function PostPreview(props){
     return (
     <div class="p-4 shadow-sm post-preview rounded border mx-auto container-fluid">
         <div class="user row">
@@ -11,17 +11,13 @@ function PostPreview(){
                 <img src={pic} alt="" class="avatar" />
             </div>
             <div class="col-10">
-                <h5>Sherlock Holmes</h5>
-                <h6 class="text-muted time">5 seconds ago</h6>
+                <h5>{props.user}</h5>
+                <h6 class="text-muted time">{props.date}</h6>
             </div>
         </div>
         <div class="question-preview mt-4">
-            <h4>Lorem ipsum dolor sit amet?</h4>
-            <p>
-                Ut enim ad minim veniam, quis nostrud exercitation 
-                ullamco laboris nisi ut aliquip ex ea commodo 
-                consequat. 
-            </p>
+            <h4>{props.title}</h4>
+            <p>{props.body} </p>
         </div>
 
         <div class="icon-buttons">
