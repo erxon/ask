@@ -58,6 +58,8 @@ function QuestionInput(props) {
         }).catch(err => {
             console.log(err);
         })
+
+        window.location.reload();
     }
 
     return (

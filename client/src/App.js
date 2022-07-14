@@ -10,10 +10,13 @@ import PostDetailed from "./components/post/PostDetailed";
 import PostWithAnswers from "./components/answers/PostWithAnswers";
 import AnswerWithComments from "./components/answers/AnswerWithComments";
 import Profile from "./components/user/Profile";
+import Navbar from "./components/Home/Navbar";
 
 function App() {
+  
   return (
     <React.StrictMode>
+    <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginAndSignup />} />

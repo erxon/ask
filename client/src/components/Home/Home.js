@@ -28,6 +28,7 @@ function Home() {
         questions()
         .then((response) => {
             let data = response.data;
+            data.reverse();
             setValues([...data]);
         })
     }, []);
@@ -40,7 +41,6 @@ function Home() {
     
     return (
         <div>
-            <Navbar active="home" />
             <div>
                 <div>
                     <div class="m-4">
