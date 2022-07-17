@@ -35,10 +35,6 @@ function QuestionInput(props) {
         });
     }, []);
 
-    
-
-    
-
     const handleChange = (event) => {
         const {name, value} = event.target;
 
@@ -49,7 +45,7 @@ function QuestionInput(props) {
         const question = {
             questionTitle: values.questionTitle,
             questionBody: values.questionBody,
-            userId: userId,
+            user: userId,
             userName: values.userName
         }
         postQuestion(question, {t: props.token})

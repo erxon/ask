@@ -21,7 +21,7 @@ function Navbar(props) {
                                 class={
                                     props.active == "home" ?
                                         "nav-link active" : "nav-link"
-                                } href="/home">
+                                } href={"/home/"+props.userId }>
                                 <FontAwesomeIcon icon={solid("house")} /> Home </a>
                         </li>
 

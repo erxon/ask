@@ -31,8 +31,45 @@ const postQuestion = async (data, credentials) => {
         console.log(err);
     }
 }
+const vote = async (params, credentials, questionId) => {
+    try{
+        let response = await axios({
+            method: 'put',
+            url: localhost + '/api/questions/vote',
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            },
+            data: JSON.stringify({userId: params.userId, questionId: questionId})
+        });
+        return response
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const unvote = async (params, credentials, questionId) => {
+    try{
+        let response = await axios({
+            method: 'put',
+            url: localhost + '/api/questions/unvote',
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            },
+            data: JSON.stringify({userId: params.userId, questionId: questionId})
+        });
+        return response
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 export {
     questions,
-    postQuestion
+    postQuestion,
+    vote,
+    unvote
 }

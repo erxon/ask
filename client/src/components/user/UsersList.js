@@ -32,14 +32,7 @@ function Users() {
 
     return (
         <div>
-            <Navbar active="users" />
             <div class="users-view">
-                <div class="head">
-                    <div class="d-inline">
-                        <FontAwesomeIcon icon={solid("users")} />
-                    </div>
-                    <h5 class="d-inline ms-3">Users</h5>
-                </div>
                 <div class="user-list row">
                     {
                         users.map(user => {

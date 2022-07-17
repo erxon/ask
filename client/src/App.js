@@ -13,10 +13,8 @@ import Profile from "./components/user/Profile";
 import Navbar from "./components/Home/Navbar";
 
 function App() {
-  
   return (
     <React.StrictMode>
-    <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginAndSignup />} />
