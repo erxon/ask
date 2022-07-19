@@ -12,8 +12,7 @@ function QuestionInput(props) {
     //handleSubmit - save the question object to the database
     //Get request to the server for the user info
 
-    const {userId} = useParams();
-
+    
     const [values, setValues] = useState({
         questionTitle: "",
         questionBody: "",
@@ -24,10 +23,10 @@ function QuestionInput(props) {
     });
 
     useEffect(() => {
-        read({userId: userId}, {t: props.token})
+        read({userId: props.credentials.user._id}, {t: props.credentials.token})
         .then(response => {
             setValues({...values, 
-                userId: userId, 
+                userId: response.data._id, 
                 userName: response.data.name
             });
         }).catch(err => {
@@ -45,7 +44,7 @@ function QuestionInput(props) {
         const question = {
             questionTitle: values.questionTitle,
             questionBody: values.questionBody,
-            user: userId,
+            user: values.userId,
             userName: values.userName
         }
         postQuestion(question, {t: props.token})
@@ -61,7 +60,7 @@ function QuestionInput(props) {
     return (
         <div class="question-input row rounded p-4 shadow-sm border mx-auto container-fluid">
             <div class="col-2">
-                <ProfilePhoto userId={userId} />
+                {values.userId && <ProfilePhoto userId={values.userId} />}
             </div>
             
             <div class="col-10">

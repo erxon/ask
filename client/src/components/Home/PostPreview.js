@@ -122,7 +122,7 @@ function PostPreview(props){
             </div>
             <div class="comment-button d-inline me-3">
                 <div class="icon d-inline">
-                    <a class="icon-button btn btn-link" href="/post">
+                    <a class="icon-button btn btn-link" href={"/post/"+props.question._id}>
                         <CommentOutlinedIcon />
                     </a>
                 </div>

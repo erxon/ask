@@ -13,8 +13,7 @@ function Home() {
     //If the user is not yet authenticated, display in the navbar the sign in or sign up button
     //Link the sign in or sign up button to the "/" path
 
-    const credentials = auth.isAuthenticated();
-    const {userId} = useParams();
+    const jwt = auth.isAuthenticated();
 
     const [values, setValues] = useState([]);
     //Listing questions
@@ -22,14 +21,13 @@ function Home() {
         questions()
         .then((response) => {
             let data = response.data;
-            console.log(data);
             data.reverse();
             setValues([...data]);
         })
     }, []);
 
 
-    if (userId === "undefined" && !credentials) {
+    if (!jwt) {
         return (<Navigate to={"/"} />);
     }
 
@@ -38,10 +36,10 @@ function Home() {
     return (
         <div>
             <div>
-            <Navbar userId={userId}/>
+            <Navbar userId={jwt.user._id}/>
                 <div>
                     <div class="m-4">
-                        <QuestionInput token={credentials.token} />
+                        <QuestionInput credentials={jwt} />
                     </div>
                     <div class="post">
                         {
@@ -50,7 +48,7 @@ function Home() {
                                 <PostPreview
                                     key={question._id}
                                     question={question}
-                                    credentials={credentials}
+                                    credentials={jwt}
                                  />
                               )
                             })

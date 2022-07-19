@@ -5,11 +5,30 @@ const localhost = 'http://localhost:5000';
 const questions = async () => {
     try{
         let response = await axios({
-            method: 'get',
-            url: localhost + '/api/questions'
+            method: "get",
+            url: localhost + "/api/questions"
         });
         return response;
     } catch (err){
+        console.log(err);
+    }
+}
+
+const question = async (params, credentials) => {
+    //read question
+    //"/api/questions/:questionId"
+    try{
+        let response = await axios({
+            method: "get",
+            url: localhost + "/api/questions/" + params.questionId,
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            }
+        });
+        return response;
+    } catch (err) {
         console.log(err);
     }
 }
@@ -71,5 +90,6 @@ export {
     questions,
     postQuestion,
     vote,
-    unvote
+    unvote,
+    question
 }

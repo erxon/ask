@@ -18,11 +18,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginAndSignup />} />
-          <Route path="/home/:userId" location="/" element={<Home />} />
+          <Route path="/home" location="/" element={<Home />} />
           <Route path="/user/:userId" element={<Profile />} />
           <Route path="/user/edit/:userId" element={<EditProfile />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/post" element={<PostDetailed />} />
+          <Route path="/post/:questionId" element={<PostDetailed />} />
           <Route path="/post/answers" element={<PostWithAnswers />} />
           <Route path="/post/answers/comments" element={<AnswerWithComments />} />
         </Routes>
