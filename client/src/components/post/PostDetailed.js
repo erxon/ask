@@ -6,7 +6,6 @@ import Post from "./Post";
 import auth from "../auth/auth-helper";
 import { useParams } from "react-router-dom";
 import { question } from "../Home/api-question";
-import { isNull } from "lodash";
 
 function PostDetailed() {
     const { questionId } = useParams();
@@ -18,7 +17,6 @@ function PostDetailed() {
         question({questionId: questionId}, {t: jwt.token})
         .then(response => {
             const data = response.data;
-            console.log(data);
             setPost({...data});
             
         }).catch(err => {
@@ -36,8 +34,16 @@ function PostDetailed() {
                     credentials={jwt}
                 />}
             </div>
-            <CommentThread />
-            <CommentSection />
+            {
+                Object.keys(post).length !== 0 && <CommentThread 
+                    postId={post._id} />
+            }
+            {   Object.keys(post).length !== 0 && <CommentSection 
+                    userId={post.user._id}
+                    userName={post.user.name}
+                    postId={post._id}
+                />
+            }
         </div>
     );
 }

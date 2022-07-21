@@ -1,47 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Comment from "./Comment";
-import sherlock from "../img/2.jpg";
-import mary from "../img/3.jpg";
-import irene from "../img/4.jpg";
+import {listComments} from "../Home/api-question";
+function CommentThread(props){
+    //GET request for comments "/api/comments"
+    //Create a state array to store comments
+    const [values, setValues] = useState([]);
+    //Filter the comments - only display the comments with the given postId
+    //Map the comments in the view
+    useEffect(() => {
+        listComments().then(response => {
+            console.log(response);
+            setValues(
+                response.data.filter(comment => {
+                    return comment.postId === props.postId
+                }));
 
-function CommentThread(){
-    let comments = [
-        {
-            picture: sherlock,
-            name: "Sherlock Holmes",
-            timeAgo: "1m",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            numOfLikes: 40,
-            numOfReplies: 10
-        },
-        {
-            picture: mary,
-            name: "Mary Sutherland",
-            timeAgo: "1m",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            numOfLikes: 40,
-            numOfReplies: 10
-        },
-        {
-            picture: irene,
-            name: "Irene Adler",
-            timeAgo: "1m",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            numOfLikes: 40,
-            numOfReplies: 10
-        }
-    ];
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
 
     return(
         <div class="comment-thread mx-auto">
-            {comments.map(comment => {
+            {values && values.map(comment => {
                 return <Comment 
-                    picture={comment.picture}
-                    name={comment.name}
-                    timeAgo={comment.timeAgo}
-                    comment={comment.content}
-                    numOfLikes={comment.numOfLikes}
-                    numOfReplies={comment.numOfReplies}
+                    key={comment.userId}
+                    userId={comment.userId}
+                    userName={comment.userName}
+                    created={comment.created}
+                    content={comment.content}
                 />
             })}
         </div>

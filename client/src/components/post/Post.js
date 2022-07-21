@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import ProfilePhoto from "../user/ProfilePhoto";
@@ -7,8 +7,26 @@ import auth from "../auth/auth-helper";
 import { displayElapsedTime } from "../helpers/displayElapsedTime";
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
+import { listComments } from "../Home/api-question";
 
 function Post(props) {
+
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        listComments().then(response => {
+            console.log(response);
+            setComments(
+                response.data.filter(comment => {
+                    return comment.postId === props.post._id
+                }));
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+    
     const checkVote = (votes) => {
         let match = votes.indexOf(props.credentials.user._id) !== -1;
         return match;
@@ -65,9 +83,11 @@ function Post(props) {
                 </div>
                 <div class="comment-button d-inline me-3">
                     <div class="icon d-inline">
-                        <a class="icon-button" href="#"><FontAwesomeIcon icon={regular("comment")} /></a>
+                    <a class="icon-button btn btn-link">
+                        <CommentOutlinedIcon />
+                    </a>
                     </div>
-                    <p class="d-inline text-muted ms-1">12</p>
+                    <p class="d-inline text-muted ms-1">{comments && comments.length}</p>
                 </div>
                 <div class="answer-button d-inline">
                     <div class="icon d-inline">

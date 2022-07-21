@@ -86,10 +86,45 @@ const unvote = async (params, credentials, questionId) => {
     }
 }
 
+const comment = async (params, credentials) => {
+    try{
+        let response = await axios({
+            method: 'post',
+            url: localhost + '/api/comments',
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            },
+            data: JSON.stringify({
+                postId: params.postId, 
+                userId: params.userId,
+                userName: params.userName, 
+                content: params.content})
+        })
+        return response
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+const listComments = async () => {
+    try{
+        let response = await axios({
+            method: 'get',
+            url: localhost + '/api/comments'
+        });
+        return response;
+    } catch (err){
+        console.log(err);
+    }
+}
 export {
     questions,
     postQuestion,
     vote,
     unvote,
-    question
+    question,
+    comment,
+    listComments
 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import pic from "../img/2.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -9,7 +9,7 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
-
+import {listComments} from "./api-question";
 function PostPreview(props){
     //read likes
 
@@ -17,6 +17,22 @@ function PostPreview(props){
     //if user's id already exists in the usersVoted, remove it 
     //display the usersVoted length
 
+    //Get request for the list of comments in comments api
+    //render comments.length
+    const [comments, setComments] = useState([]);
+    useEffect(() => {
+        listComments().then(response => {
+            setComments(
+                response.data.filter(comment => {
+                    return comment.postId === props.question._id
+                }));
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
+    
     let currentDate = new Date();
     let postCreatedDate = new Date(props.question.created);
 
@@ -126,7 +142,7 @@ function PostPreview(props){
                         <CommentOutlinedIcon />
                     </a>
                 </div>
-                <p class="d-inline text-muted ms-1">12</p>
+                <p class="d-inline text-muted ms-1">{comments && comments.length}</p>
             </div>
             <div class="answer-button d-inline">
                 <div class="icon d-inline">

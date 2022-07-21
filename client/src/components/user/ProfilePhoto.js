@@ -11,7 +11,6 @@ export default function ProfilePhoto(props) {
             responseType: "arraybuffer"
         })
         .then((response) => {
-            console.log(response.data);
             const base64 = Buffer.from(response.data).toString('base64');
             
             setImage(base64);
