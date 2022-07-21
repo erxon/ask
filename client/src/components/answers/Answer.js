@@ -8,10 +8,10 @@ function Answer() {
     return (
         <div class="border shadow-sm">
             <div class="mt-3 ms-3">
-                <UserDetails
+                {/* <UserDetails
                     photo={mark}
                     name="Mark Vonkovitch"
-                    date="Nov 1, 2022" />
+                    date="Nov 1, 2022" /> */}
             </div>
             <div class="answer-content">
                 <h4>Answer title</h4>

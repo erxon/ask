@@ -146,7 +146,7 @@ function PostPreview(props){
             </div>
             <div class="answer-button d-inline">
                 <div class="icon d-inline">
-                    <a class="icon-button" href="#">
+                    <a class="icon-button" href={"/post/answers/"+props.question._id}>
                         <QuestionAnswerOutlinedIcon />
                     </a>
                 </div>

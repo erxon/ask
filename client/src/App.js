@@ -23,7 +23,7 @@ function App() {
           <Route path="/user/edit/:userId" element={<EditProfile />} />
           <Route path="/users" element={<Users />} />
           <Route path="/post/:questionId" element={<PostDetailed />} />
-          <Route path="/post/answers" element={<PostWithAnswers />} />
+          <Route path="/post/answers/:questionId" element={<PostWithAnswers />} />
           <Route path="/post/answers/comments" element={<AnswerWithComments />} />
         </Routes>
       </BrowserRouter>

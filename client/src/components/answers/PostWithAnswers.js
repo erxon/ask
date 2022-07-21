@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Home/Navbar";
 import UserDetails from "./UserDetails";
 import Question from "./Question";
@@ -8,23 +8,53 @@ import Answer from "./Answer";
 import sherlock from "../img/2.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import auth from "../auth/auth-helper";
+import {question} from "../Home/api-question";
+import { useParams } from "react-router-dom";
 
 function PostWithAnswers() {
+    const jwt = auth.isAuthenticated();
+    const {questionId} = useParams();
+
+    const [values, setValues] = useState({
+       user: {},
+       title: "",
+       content: ""
+    });
+
+    useEffect(() => {
+        question({questionId: questionId}, {t: jwt.token})
+        .then(response => {
+            setValues({
+                ...values,
+                user: response.data.user,
+                title: response.data.questionTitle,
+                content: response.data.questionBody
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
     return (
         <div>
             <Navbar />
             <div class="row gx-0">
                 <div class="post col-lg-6 col-md-12"> 
                     <div>
-                        <UserDetails 
-                            photo={sherlock} 
-                            name="Sherlock Holmes" 
-                            date="Nov 4, 2022"/>
+                        {Object.keys(values.user).length !== 0 && <UserDetails 
+                            userId={values.user._id} 
+                            name={values.user.name} 
+                            jwt={jwt} 
+                            />}
                     </div>
                     <div>
-                        <Question />
+                        <Question title={values.title} content={values.content} />
                     </div>
-                    <div class="answer-input mt-3">
+                    
+                </div>
+                <div class="col-lg-6 col-md-12 answers">
+                    <div class="answer-input mt-3 mb-3">
                         <div class="row gx-0 container-fluid">
                             <div class="col-2">
                                 <div class="ms-2">
@@ -40,8 +70,6 @@ function PostWithAnswers() {
                         </div>
                         
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-12 answers">
                     <div class="answers-heading">
                         <h3>Answers</h3>
                     </div>
@@ -50,6 +78,7 @@ function PostWithAnswers() {
                         <Answer />
                         <Answer />
                     </div>
+                    
                 </div>
             </div>
             
