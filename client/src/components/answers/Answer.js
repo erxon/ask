@@ -4,21 +4,17 @@ import mark from "../img/1.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function Answer() {
+function Answer(props) {
     return (
         <div class="border shadow-sm">
             <div class="mt-3 ms-3">
-                {/* <UserDetails
-                    photo={mark}
-                    name="Mark Vonkovitch"
-                    date="Nov 1, 2022" /> */}
+                <UserDetails
+                    userId={props.answer.user}
+                    jwt={props.jwt} />
             </div>
             <div class="answer-content">
-                <h4>Answer title</h4>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
+                <h4>{props.answer.answerTitle}</h4>
+                <p>{props.answer.answerBody}</p>
             </div>
             <div class="answer-icons">
                 <div class="like-button d-inline me-3">

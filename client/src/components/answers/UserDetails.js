@@ -4,13 +4,14 @@ import ProfilePhoto from "../user/ProfilePhoto";
 
 function UserDetails(props) {
     const [value, setValue] = useState({
+        name: "",
         joined: ""
     });
 
     useEffect(() => {
         read({userId: props.userId}, {t: props.jwt.token}).then(response => {
             let dateJoined = new Date(response.data.created)
-            setValue({joined: dateJoined.toDateString()});
+            setValue({...value, name: response.data.name, joined: dateJoined.toDateString()});
         }).catch(err => {
             console.log(err);
         })
@@ -29,7 +30,7 @@ function UserDetails(props) {
             </div>
             
             <div class="col-10 mt-1">
-                <h6>{props.name}</h6>
+                <h6>{props.name ? props.name : value.name}</h6>
                 <p class="time">Joined {value.joined && value.joined}</p>
             </div>
         </div>
