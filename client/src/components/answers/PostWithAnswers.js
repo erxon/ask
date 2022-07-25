@@ -12,7 +12,7 @@ import auth from "../auth/auth-helper";
 import {question} from "../Home/api-question";
 import { useParams } from "react-router-dom";
 import {listAnswers, submitAnswer} from "./api-answer";
-
+import ProfilePhoto from "../user/ProfilePhoto";
 function PostWithAnswers() {
     //Submitting answers
     //1. Create state constant to handle values
@@ -39,7 +39,7 @@ function PostWithAnswers() {
         }
         submitAnswer(data, {t: jwt.token})
         .then(response => {
-            console.log(response);
+            window.location.reload();
         }).catch(err => {
             console.log(err);
         });
@@ -107,7 +107,7 @@ function PostWithAnswers() {
                         <div class="row gx-0 container-fluid">
                             <div class="col-2">
                                 <div class="ms-2">
-                                    <Avatar picture={mark} />
+                                    <ProfilePhoto userId={jwt.user._id} />
                                 </div>
                             </div>
                             <input
@@ -146,7 +146,7 @@ function PostWithAnswers() {
                             <div class="row gx-0">
                                 <div class="col-2">
                                     <div class="ms-3">
-                                        <Avatar picture={mark}/>
+                                        <ProfilePhoto userId={jwt.user._id} />
                                     </div>
                                 </div>
                                 <input 

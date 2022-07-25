@@ -1,7 +1,4 @@
 import React, {useEffect, useState} from "react";
-import pic from "../img/2.jpg";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import ProfilePhoto from "../user/ProfilePhoto";
 import {vote, unvote} from './api-question';
 import auth from "../auth/auth-helper";
@@ -10,6 +7,8 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import {listComments} from "./api-question";
+import {listAnswers} from "../answers/api-answer";
+
 function PostPreview(props){
     //read likes
 
@@ -20,6 +19,7 @@ function PostPreview(props){
     //Get request for the list of comments in comments api
     //render comments.length
     const [comments, setComments] = useState([]);
+    const [answers, setAnswers] = useState([]);
     useEffect(() => {
         listComments().then(response => {
             setComments(
@@ -31,6 +31,13 @@ function PostPreview(props){
             console.log(err);
         });
     }, []);
+
+    useEffect(() => {
+        listAnswers({questionId: props.question._id}).then(response => {
+            setAnswers([...response.data])
+
+        }).catch(err => { console.log(err) });
+    }, [])
 
     
     let currentDate = new Date();
@@ -150,7 +157,7 @@ function PostPreview(props){
                         <QuestionAnswerOutlinedIcon />
                     </a>
                 </div>
-                <p class="d-inline text-muted ms-1">1</p>
+                <p class="d-inline text-muted ms-1">{answers && answers.length}</p>
             </div>
         </div>
     </div>

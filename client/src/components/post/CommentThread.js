@@ -9,7 +9,6 @@ function CommentThread(props){
     //Map the comments in the view
     useEffect(() => {
         listComments().then(response => {
-            console.log(response);
             setValues(
                 response.data.filter(comment => {
                     return comment.postId === props.postId
@@ -24,7 +23,7 @@ function CommentThread(props){
         <div class="comment-thread mx-auto">
             {values && values.map(comment => {
                 return <Comment 
-                    key={comment.userId}
+                    key={comment._id}
                     userId={comment.userId}
                     userName={comment.userName}
                     created={comment.created}

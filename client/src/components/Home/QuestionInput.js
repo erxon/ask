@@ -11,7 +11,7 @@ function QuestionInput(props) {
     //handleChange - to handle changes in the input fields
     //handleSubmit - save the question object to the database
     //Get request to the server for the user info
-
+    
     
     const [values, setValues] = useState({
         questionTitle: "",
@@ -47,14 +47,14 @@ function QuestionInput(props) {
             user: values.userId,
             userName: values.userName
         }
-        postQuestion(question, {t: props.token})
+        postQuestion(question, {t: props.credentials.token})
         .then((response) => {
+            console.log(response);
             setValues({...values, response: response.data.message});
+            
         }).catch(err => {
             console.log(err);
         })
-
-        window.location.reload();
     }
 
     return (

@@ -39,7 +39,7 @@ function PostDetailed() {
                     postId={post._id} />
             }
             {   Object.keys(post).length !== 0 && <CommentSection 
-                    userId={post.user._id}
+                    userId={jwt.user._id}
                     userName={post.user.name}
                     postId={post._id}
                 />

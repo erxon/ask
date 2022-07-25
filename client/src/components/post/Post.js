@@ -8,12 +8,14 @@ import { displayElapsedTime } from "../helpers/displayElapsedTime";
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import { listComments } from "../Home/api-question";
-
+import { listAnswers } from "../answers/api-answer";
 function Post(props) {
 
     const [comments, setComments] = useState([]);
-
+    const [answers, setAnswers] = useState([]);
+    
     useEffect(() => {
         listComments().then(response => {
             console.log(response);
@@ -26,6 +28,13 @@ function Post(props) {
             console.log(err);
         });
     }, []);
+
+    useEffect(() => {
+        listAnswers({questionId: props.post._id}).then(response => {
+            setAnswers([...response.data])
+
+        }).catch(err => { console.log(err) });
+    }, [])
     
     const checkVote = (votes) => {
         let match = votes.indexOf(props.credentials.user._id) !== -1;
@@ -91,9 +100,11 @@ function Post(props) {
                 </div>
                 <div class="answer-button d-inline">
                     <div class="icon d-inline">
-                        <a class="icon-button" href="#"><FontAwesomeIcon icon={regular("pen-to-square")} /></a>
+                    <a class="icon-button" href={"/post/answers/"+props.post._id}>
+                        <QuestionAnswerOutlinedIcon />
+                    </a>
                     </div>
-                    <p class="d-inline text-muted ms-1">1</p>
+                    <p class="d-inline text-muted ms-1">{answers && answers.length}</p>
                 </div>
             </div>
         </div>
