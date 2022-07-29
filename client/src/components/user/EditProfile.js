@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import auth from "../auth/auth-helper";
 import {read, update} from "./api-user";
-import { useParams, Navigate } from "react-router-dom";
 import ProfilePhoto from "./ProfilePhoto";
+import {Navigate} from "react-router-dom";
 
 function EditProfile() {
     //State object
@@ -24,11 +24,11 @@ function EditProfile() {
     const jwt = auth.isAuthenticated();
 
     //Get userId from url param
-    const {userId} = useParams();
+    
 
     //Get request to the server using useEffect
     useEffect(() => {
-        read({userId}, {t: jwt.token}).then((response) => {
+        read({userId: jwt.user._id}, {t: jwt.token}).then((response) => {
             const data = response.data;
             console.log(data);
             if(data && data.error){
@@ -45,7 +45,7 @@ function EditProfile() {
 
             }
         });
-    }, [userId]);
+    }, [jwt.user._id]);
 
 
 
@@ -97,7 +97,7 @@ function EditProfile() {
                 {/*Display image*/}
                 <div className="text-center mt-3">
                     <ProfilePhoto 
-                        userId={userId}
+                        userId={jwt.user._id}
                         customStyle={{width: "100px", height: "100px"}}
                     />
                 </div>
