@@ -23,7 +23,7 @@ const list = async () => {
             method: "get",
             url: "http://localhost:5000/api/users"
         });
-        return await response.json();
+        return response;
     } catch (err) {
         console.log(err);
     }
@@ -80,10 +80,48 @@ const remove = async (params, credentials) => {
     }
 }
 
+const follow = async(params, credentials, followId) => {
+    try {
+        let response = await axios({
+            method: 'put',
+            url: 'http://localhost:5000/api/users/follow',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + credentials.t
+            },
+            data: JSON.stringify({userId: params.userId, followId: followId})
+        });
+        return response
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+const unfollow = async(params, credentials, unfollowId) => {
+    try{
+        let response = await axios({
+            method: 'put',
+            url: 'http://localhost:5000/api/users/unfollow',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + credentials.t
+            },
+            data: JSON.stringify({userId: params.userId, unfollowId: unfollowId})
+        });
+        return response;
+    } catch (err){
+        console.log(err);
+    }
+}
+
 export {
     create,
     list,
     read,
     update,
-    remove
+    remove,
+    follow,
+    unfollow
 };

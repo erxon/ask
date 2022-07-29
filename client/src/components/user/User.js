@@ -1,19 +1,28 @@
 import React from "react";
-import Avatar from "./Avatar";
+import ProfilePhoto from "./ProfilePhoto";
 
 function User(props) {
-    let style="user "+props.customStyle;
+
+
+
+    
+
+    const timeJoined = new Date(props.timeJoined);
+
     return (
-        <div class={style}>
-            <div class="row gx-0 shadow border pb-4 mb-3">
-                <div class="col-2">
-                    <Avatar picture={props.picture} custom="m-3 mt-4" />
+        <div class="user col-lg-4 col-md-6">
+            <div class="d-flex flex-row align-items-center border shadow-sm mb-3 bg-white">
+                <div class="text-center mb-2 mt-2 ms-2">
+                    <ProfilePhoto userId={props.userId} />
                 </div>
-                <div class="info col-10 pt-4 ps-4 container-fluid">
-                    <h6>{props.name}</h6>
-                    <p class="time">Joined {props.timeJoined}</p>
-                    <p>{props.about}</p>
-                    <a href="#">Follow</a>
+                <div class="info container-fluid d-flex flex-column">
+                    <div className="mt-2">
+                            <a style={{color: "#000"}} href={"/profile/"+props.userId}>{props.name}</a>
+                    </div>
+                    {<div>
+                        {props.timeJoined && <p class="time">Joined {timeJoined.toDateString()}</p>}
+                        <p>{props.about}</p>
+                    </div>}
                 </div>
             </div>
         </div>

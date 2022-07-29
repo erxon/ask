@@ -119,6 +119,45 @@ const listComments = async () => {
         console.log(err);
     }
 }
+
+const remove = async (params, credentials) => {
+    try{
+        let response = await axios({
+            method: 'delete',
+            url: localhost + '/api/questions/'+params.questionId,
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            }
+        })
+        return response;
+    }catch (err){
+        console.log(err);
+    }
+}
+
+const update = async (params, credentials) => {
+    try{
+        let response = await axios({
+            method: 'put',
+            url: localhost + '/api/questions/'+params.questionId,
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            },
+            data: JSON.stringify({
+                questionTitle: params.questionTitle,
+                questionBody: params.questionBody
+            })
+        })
+        
+        return response;
+    }catch (err){
+        console.log(err);
+    }
+}
 export {
     questions,
     postQuestion,
@@ -126,5 +165,7 @@ export {
     unvote,
     question,
     comment,
-    listComments
+    listComments,
+    remove,
+    update
 }
