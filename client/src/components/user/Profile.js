@@ -7,8 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FollowProfileButton from "./FollowProfileButton";
-import { read } from "./api-user";
+import { read, remove } from "./api-user";
 import ProfileTab from "./ProfileTab";
+import { Link, Navigate } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
 
 function Profile() {
   const { userId } = useParams();
@@ -17,6 +24,8 @@ function Profile() {
     user: { following: [], followers: [] },
     following: false,
   });
+  const [navigate, setNavigate] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     read({ userId: userId }, { t: jwt.token })
@@ -59,6 +68,30 @@ function Profile() {
       }
     });
   };
+
+  const handleOpenClick = () => {
+    setOpen(true);
+    console.log(open);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = () => {
+    setOpen(false);
+
+    remove({ userId: userId }, { t: jwt.token })
+      .then((response) => {
+        auth.clearJWT(() => console.log("deleted"));
+        setNavigate(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  if (navigate) {
+    return <Navigate to="/" />;
+  }
   /* */
 
   return (
@@ -75,12 +108,14 @@ function Profile() {
           {auth.isAuthenticated().user &&
           auth.isAuthenticated().user._id == userId ? (
             <div className="d-inline ms-3 edit-profile-icon">
-              <IconButton size="small">
-                <DeleteIcon fontSize="small" sx={{color: "#ed4a4f"}}/>
+              <IconButton onClick={handleOpenClick} size="small">
+                <DeleteIcon fontSize="small" sx={{ color: "#ed4a4f" }} />
               </IconButton>
-              <IconButton size="small">
-                <EditIcon fontSize="small" />
-              </IconButton>
+              <Link to={"/user/edit/" + userId}>
+                <IconButton size="small">
+                  <EditIcon fontSize="small" />
+                </IconButton>
+              </Link>
             </div>
           ) : (
             <FollowProfileButton
@@ -96,6 +131,26 @@ function Profile() {
           userId={values.user._id}
         />
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Delete account"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete your account? This action cannot be
+            undone
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>No</Button>
+          <Button onClick={handleDelete} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
