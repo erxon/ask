@@ -15,6 +15,18 @@ const answer = async (params) => {
     }
 }
 
+const listAllAnswers = async () => {
+    try{
+        let response = await axios({
+            method: "get",
+            url: localhost + '/api/answers'
+        });
+        return response;
+    } catch (err){
+        console.log(err);
+    }
+}
+
 const listAnswers = async (params) => {
     try{
         let response = await axios({
@@ -26,6 +38,7 @@ const listAnswers = async (params) => {
         console.log(err);
     }
 }
+
 
 const submitAnswer = async (params, credentials) => {
     try{
@@ -87,10 +100,51 @@ const unvote = async (params, credentials, answerId) => {
     }
 }
 
+const remove = async (params, credentials) => {
+    try{
+        let response = await axios({
+            method: 'delete',
+            url: localhost + '/api/answers/'+params.answerId,
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            }
+        })
+        return response;
+    }catch (err){
+        console.log(err);
+    }
+}
+const update = async (params, credentials) => {
+    try{
+        let response = await axios({
+            method: 'put',
+            url: localhost + '/api/answers/'+params.answerId,
+            headers: {
+                "Accept": "appication/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + credentials.t
+            },
+            data: JSON.stringify({
+                answerTitle: params.answerTitle,
+                answerBody: params.answerBody
+            })
+        })
+        
+        return response;
+    }catch (err){
+        console.log(err);
+    }
+}
+
 export {
     answer,
     listAnswers,
     submitAnswer,
     vote,
-    unvote
+    unvote,
+    remove,
+    update,
+    listAllAnswers
 }

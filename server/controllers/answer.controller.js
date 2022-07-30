@@ -16,6 +16,17 @@ const create = async (req, res) => {
     }
 }
 
+const allAnswers = async (req, res) => {
+    try{
+        let answers = await Answer.find({});
+        res.json(answers)
+    } catch (err){
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+}
+
 const list = async (req, res) => {
     try{
         let answers = await Answer.find({"questionId": req.params.questionId});
@@ -146,5 +157,6 @@ export default {
     update, 
     remove,
     vote,
-    unvote
+    unvote,
+    allAnswers
 };

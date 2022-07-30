@@ -5,6 +5,7 @@ import authCtrl from "../controllers/auth.controller";
 const router = express.Router();
 
 router.route("/api/answers")
+    .get(answerCtrl.allAnswers)
     .post(authCtrl.requireSignin, answerCtrl.create);
 
 router.route("/api/answers/list/:questionId")

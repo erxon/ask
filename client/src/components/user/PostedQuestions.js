@@ -54,8 +54,8 @@ function PostedQuestions(props) {
       if (question._id === postId) {
         return {
           ...question,
-          questionTitle: values.questionTitle,
-          questionBody: values.questionBody,
+          questionTitle: values.postTitle,
+          questionBody: values.postBody,
         };
       } else {
         return question;

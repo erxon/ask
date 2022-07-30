@@ -5,12 +5,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 
 function QuestionAndAnswer(props) {
-  const jwt = auth.isAuthenticated();
 
   const [openForm, setOpenForm] = useState(false);
   const [editValues, setEditValues] = useState({
-    questionTitle: props.postTitle,
-    questionBody: props.postContent
+    postTitle: props.postTitle,
+    postBody: props.postContent
   })
 
 
@@ -67,19 +66,19 @@ function QuestionAndAnswer(props) {
             <input 
                 className="form-control mb-3"
                 placeholder="Edit your question title here"
-                name="questionTitle"
-                value={editValues.questionTitle}
+                name="postTitle"
+                value={editValues.postTitle}
                 onChange={handleEditChange}
             />
             <textarea 
                 className="form-control mb-3"
                 placeholder="Edit your question content here"
-                name="questionBody"
-                value={editValues.questionBody}
+                name="postBody"
+                value={editValues.postBody}
                 onChange={handleEditChange}
             />
             <button className="btn btn-custom" onClick={
-                () => {props.onSubmit(props.postId, editValues, props.index)}
+                () => {props.onSubmit(props.postId, editValues)}
             }>Submit</button>
         </div>}
         <hr />
