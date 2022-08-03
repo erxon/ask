@@ -16,20 +16,26 @@ function App() {
   return (
     <React.StrictMode>
       <BrowserRouter>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<LoginAndSignup />} />
-          <Route path="/home" location="/" element={<Home />} />
+          <Route path="/" location="/" element={<Home />} />
+          <Route path="/auth" element={<LoginAndSignup />} />
           <Route path="/profile/:userId" element={<Profile />} />
-          <Route path="/user/edit/:userId" element={<EditProfile />} />
+          <Route path="/user/edit" element={<EditProfile />} />
           <Route path="/users" element={<Users />} />
           <Route path="/post/:questionId" element={<PostDetailed />} />
-          <Route path="/post/answers/:questionId" element={<PostWithAnswers />} />
-          <Route path="/post/answers/comments/:answerId" element={<AnswerWithComments />} />
+          <Route
+            path="/post/answers/:questionId"
+            element={<PostWithAnswers />}
+          />
+          <Route
+            path="/post/answers/comments/:answerId"
+            element={<AnswerWithComments />}
+          />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
   );
-
 }
 
 export default App;

@@ -18,7 +18,6 @@ function Users() {
 
   return (
     <div>
-      <Navbar />
       <div class="users-view">
         <div class="user-list row">
           {values &&

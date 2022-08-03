@@ -96,7 +96,6 @@ function Profile() {
 
   return (
     <div>
-      <Navbar />
       <div class="profile border shadow-sm">
         <div class="center">
           <ProfilePhoto userId={userId} />
@@ -111,7 +110,7 @@ function Profile() {
               <IconButton onClick={handleOpenClick} size="small">
                 <DeleteIcon fontSize="small" sx={{ color: "#ed4a4f" }} />
               </IconButton>
-              <Link to={"/user/edit/" + userId}>
+              <Link to="/user/edit">
                 <IconButton size="small">
                   <EditIcon fontSize="small" />
                 </IconButton>

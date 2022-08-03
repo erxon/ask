@@ -14,7 +14,8 @@ a{
     background-color: #112B3C;
 }
 .login-signup{
-    background-color: #fff;
+    background-color: #d9d9d9;
+    margin-top: 100px;
     width: 50%;
 }
 .login-signup-col{
