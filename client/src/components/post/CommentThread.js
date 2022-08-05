@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { listComments } from "../Home/api-question";
 function CommentThread(props) {
-  //GET request for comments "/api/comments"
-  //Create a state array to store comments
   const [values, setValues] = useState([]);
-  //Filter the comments - only display the comments with the given postId
-  //Map the comments in the view
   useEffect(() => {
     listComments()
       .then((response) => {
@@ -22,7 +18,7 @@ function CommentThread(props) {
   }, []);
 
   return (
-    <div class="comment-thread mx-auto">
+    <div className="comment-thread mx-auto">
       {values &&
         values.map((comment) => {
           return (

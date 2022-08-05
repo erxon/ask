@@ -63,14 +63,6 @@ function PostPreview(props) {
     displayElapsedDate = postCreatedDate.toDateString();
   }
 
-  //if timeDiff < 60000 show "recent"
-  //if 3,600,000 > timeDiff > 60000 "(timeDiff /= 1000) / 60  minutes ago"
-  //if  86,400,000 > timeDiff > 3,600,000 "(timeDiff /= 1000) / 60 / 60 hr ago"
-  //if timeDiff > 86,400,000 display postCreatedDate
-
-  // console.log(postCreatedDate.toDateString());
-  // console.log(timeDiff);
-  // console.log(seconds);
   const checkVote = (votes) => {
     let match = votes.indexOf(props.credentials.user._id) !== -1;
     return match;
@@ -80,27 +72,6 @@ function PostPreview(props) {
     vote: checkVote(props.question.usersVoted),
     votes: props.question.usersVoted.length,
   });
-
-  // const handleLike = () => {
-  //     const data = {
-  //         questionId: props.questionId,
-  //         userId: props.userId
-  //     }
-  //     if(!props.usersVoted.includes(props.userId)){
-  //         vote(data, {t: props.token}).then(response => {
-  //             console.log(response);
-  //             console.log(props.usersVoted);
-  //         }).catch(err => {
-  //             console.log(err);
-  //         })
-  //     } else {
-  //         unvote(data, {t: props.token}).then(response => {
-  //             console.log(response);
-  //             console.log(props.usersVoted);
-  //         }).catch(err => {
-  //             console.log(err);
-  //         })
-  //     }
 
   const clickLike = () => {
     let callApi = values.vote ? unvote : vote;
@@ -127,17 +98,17 @@ function PostPreview(props) {
   };
 
   return (
-    <div class="p-4 shadow-sm post-preview rounded border mx-auto container-fluid">
-      <div class="user row">
-        <div class="col-2 px-4">
+    <div className="p-4 shadow-sm post-preview rounded border mx-auto container-fluid">
+      <div className="user row">
+        <div className="col-2 px-4">
           <ProfilePhoto userId={props.question.user} />
         </div>
-        <div class="col-10">
+        <div className="col-10">
           <h5>{props.question.userName}</h5>
-          <h6 class="text-muted time">{displayElapsedDate}</h6>
+          <h6 className="text-muted time">{displayElapsedDate}</h6>
         </div>
       </div>
-      <div class="question-preview mt-4">
+      <div className="question-preview mt-4">
         <h4>{props.question.questionTitle}</h4>
         <p>
           {props.question.questionBody &&
@@ -147,10 +118,10 @@ function PostPreview(props) {
         </p>
       </div>
 
-      <div class="icon-buttons">
-        <div class="like-button d-inline me-3">
-          <div class="icon d-inline">
-            <a class="icon-button btn btn-link" onClick={clickLike}>
+      <div className="icon-buttons">
+        <div className="like-button d-inline me-3">
+          <div className="icon d-inline">
+            <a className="icon-button btn btn-link" onClick={clickLike}>
               {values.vote ? (
                 <ThumbUpIcon sx={{ color: "#F66B0E" }} />
               ) : (
@@ -158,26 +129,33 @@ function PostPreview(props) {
               )}
             </a>
           </div>
-          <p class="d-inline text-muted ms-1">{values.votes}</p>
+          <p className="d-inline text-muted ms-1">{values.votes}</p>
         </div>
-        <div class="comment-button d-inline me-3">
-          <div class="icon d-inline">
+        <div className="comment-button d-inline me-3">
+          <div className="icon d-inline">
             <a
-              class="icon-button btn btn-link"
+              className="icon-button btn btn-link"
               href={"/post/" + props.question._id}
             >
               <CommentOutlinedIcon />
             </a>
           </div>
-          <p class="d-inline text-muted ms-1">{comments && comments.length}</p>
+          <p className="d-inline text-muted ms-1">
+            {comments && comments.length}
+          </p>
         </div>
-        <div class="answer-button d-inline">
-          <div class="icon d-inline">
-            <a class="icon-button" href={"/post/answers/" + props.question._id}>
+        <div className="answer-button d-inline">
+          <div className="icon d-inline">
+            <a
+              className="icon-button"
+              href={"/post/answers/" + props.question._id}
+            >
               <QuestionAnswerOutlinedIcon />
             </a>
           </div>
-          <p class="d-inline text-muted ms-1">{answers && answers.length}</p>
+          <p className="d-inline text-muted ms-1">
+            {answers && answers.length}
+          </p>
         </div>
       </div>
     </div>

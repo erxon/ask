@@ -24,16 +24,16 @@ function UserDetails(props) {
   }, []);
 
   return (
-    <div class="user-details row gx-0 container-fluid">
-      <div class="col-2">
-        <div class="ms-3">
+    <div className="user-details row gx-0 container-fluid">
+      <div className="col-2">
+        <div className="ms-3">
           {props.userId && <ProfilePhoto userId={props.userId} />}
         </div>
       </div>
 
-      <div class="col-10 mt-1">
+      <div className="col-10 mt-1">
         <h6>{props.name ? props.name : value.name}</h6>
-        <p class="time">Joined {value.joined && value.joined}</p>
+        <p className="time">Joined {value.joined && value.joined}</p>
       </div>
     </div>
   );

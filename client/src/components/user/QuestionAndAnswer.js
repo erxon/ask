@@ -41,9 +41,9 @@ function QuestionAndAnswer(props) {
         Add edit and delete button if jwt.user._id === props.userId
         */}
 
-      <div class="posted-question">
-        <h5 class="mb-0">{props.postTitle}</h5>
-        <p class="date">{datePosted.toDateString()}</p>
+      <div className="posted-question">
+        <h5 className="mb-0">{props.postTitle}</h5>
+        <p className="date">{datePosted.toDateString()}</p>
         <p>{props.postContent}</p>
         <div className="d-flex flex-row">
           <div className="align-self-center">

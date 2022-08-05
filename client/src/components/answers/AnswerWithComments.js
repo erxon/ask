@@ -12,15 +12,12 @@ import auth from "../auth/auth-helper";
 function AnswerWithComments() {
   const { answerId } = useParams();
   const jwt = auth.isAuthenticated();
-  console.log(jwt.token);
   const [answerValues, setAnswer] = useState({});
   const [values, setValues] = useState([]);
 
-  console.log(answerId);
   useEffect(() => {
     answer({ answerId: answerId })
       .then((response) => {
-        console.log(response.data);
         setAnswer({ ...response.data });
       })
       .catch((err) => {
@@ -41,13 +38,10 @@ function AnswerWithComments() {
         console.log(err);
       });
   }, []);
-  console.log(values);
 
   const handleDelete = (id) => {
     deleteComment({ commentId: id }, { t: jwt.token })
       .then((response) => {
-        console.log(id);
-        console.log(response);
         setValues([
           ...values.filter((comment) => {
             return comment._id !== id;
@@ -64,14 +58,14 @@ function AnswerWithComments() {
 
   return (
     <div>
-      <div class="single-answer mx-auto mt-4">
+      <div className="single-answer mx-auto mt-4">
         {Object.keys(answerValues).length !== 0 && (
           <Answer answer={answerValues} jwt={jwt} />
         )}
       </div>
       <div>
         {/* <CommentThread postId={answerId} newComment={comment} /> */}
-        <div class="comment-thread mx-auto">
+        <div className="comment-thread mx-auto">
           {values.length > 0 &&
             values.map((comment) => {
               return (

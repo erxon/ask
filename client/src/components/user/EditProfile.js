@@ -46,7 +46,6 @@ function EditProfile() {
     event.preventDefault();
     //Instantiate FormData object
     let userData = new FormData();
-    console.log(values);
 
     //Save key value pairs in the userData object
     values.name && userData.append("name", values.name);
@@ -58,10 +57,7 @@ function EditProfile() {
     //PUT request to the server
     update({ userId: values.id }, { t: jwt.token }, userData)
       .then((response) => {
-        console.log("This is Update function");
         const data = response;
-        console.log(response);
-
         if (data && data.error) {
           setValues({ ...values, error: data.error });
         } else {

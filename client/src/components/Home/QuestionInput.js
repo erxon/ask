@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
-import { useParams } from "react-router-dom";
 import { postQuestion } from "./api-question";
 import ProfilePhoto from "../user/ProfilePhoto";
 import { read } from "../user/api-user";
 
 function QuestionInput(props) {
-  //create a state object question: questionTitle, questionContent
-  //handleChange - to handle changes in the input fields
-  //handleSubmit - save the question object to the database
-  //Get request to the server for the user info
-
   const [values, setValues] = useState({
     questionTitle: "",
     questionBody: "",
@@ -65,7 +53,6 @@ function QuestionInput(props) {
 
     postQuestion(question, { t: props.credentials.token })
       .then((response) => {
-        console.log(response);
         props.onSubmit(response.data);
         setValues({
           ...values,
@@ -80,15 +67,15 @@ function QuestionInput(props) {
   };
 
   return (
-    <div class="question-input row rounded p-4 shadow-sm border mx-auto container-fluid">
-      <div class="col-2">
+    <div className="question-input row rounded p-4 shadow-sm border mx-auto container-fluid">
+      <div className="col-2">
         {values.userId && <ProfilePhoto userId={values.userId} />}
       </div>
 
-      <div class="col-10">
+      <div className="col-10">
         <input
           type="text"
-          class="form-control my-2"
+          className="form-control my-2"
           name="questionTitle"
           onChange={handleChange}
           onClick={handleInputClick}
@@ -101,7 +88,7 @@ function QuestionInput(props) {
               type="text"
               name="questionBody"
               placeholder="Description"
-              class="form-control mt-3"
+              className="form-control mt-3"
               onChange={handleChange}
               value={values.questionBody}
             />

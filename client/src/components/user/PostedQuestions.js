@@ -16,7 +16,6 @@ function PostedQuestions(props) {
   useEffect(() => {
     questions()
       .then((response) => {
-        console.log(response);
         setQuestions(
           response.data.filter((post) => {
             if ("user" in post) {
@@ -24,7 +23,6 @@ function PostedQuestions(props) {
             }
           })
         );
-        console.log(questionValues);
       })
       .catch((err) => {
         console.log(err);
@@ -39,7 +37,6 @@ function PostedQuestions(props) {
     );
     remove({ questionId: postId }, { t: jwt.token })
       .then((response) => {
-        console.log(response);
         setSnackbar({ open: true, message: "Question successfully deleted" });
       })
       .catch((err) => {
@@ -48,8 +45,6 @@ function PostedQuestions(props) {
   };
 
   const handleUpdate = (postId, values, setEditValues) => {
-    console.log(values);
-
     let newArray = questionValues.map((question) => {
       if (question._id === postId) {
         return {

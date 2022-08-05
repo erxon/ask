@@ -48,23 +48,23 @@ function CommentSection(props) {
 
   return (
     <div>
-      <div class="comment-section shadow-sm">
-        <div class="comment-input content-fluid row border gx-0 p-4">
-          <div class="col-2 px-3 py-2">
+      <div className="comment-section shadow-sm">
+        <div className="comment-input content-fluid row border gx-0 p-4">
+          <div className="col-2 px-3 py-2">
             <ProfilePhoto userId={props.userId} />
           </div>
-          <div class="col-8 p-3">
+          <div className="col-8 p-3">
             <input
               type="text"
               name="comment"
               onChange={handleChange}
               value={values.content}
               placeholder="type your comment here"
-              class="form-control"
+              className="form-control"
             />
           </div>
-          <div class="col-2">
-            <div class="send-icon text-center mt-4">
+          <div className="col-2">
+            <div className="send-icon text-center mt-4">
               <button className="btn btn-link" onClick={handleClick}>
                 <FontAwesomeIcon icon={solid("paper-plane")} />
               </button>

@@ -81,7 +81,6 @@ function Profile() {
 
   const handleOpenClick = () => {
     setOpen(true);
-    console.log(open);
   };
   const handleClose = () => {
     setOpen(false);
@@ -133,14 +132,14 @@ function Profile() {
 
   return (
     <div>
-      <div class="profile border shadow-sm">
-        <div class="center">
+      <div className="profile border shadow-sm">
+        <div className="center">
           <ProfilePhoto userId={userId} />
         </div>
-        <div class="center user-info">
+        <div className="center user-info">
           <h3>{values.user.name && values.user.name}</h3>
-          <p class="date">Joined: {dateJoined.toDateString()} </p>
-          <p class="about d-inline">{values && values.user.about}</p>
+          <p className="date">Joined: {dateJoined.toDateString()} </p>
+          <p className="about d-inline">{values && values.user.about}</p>
           {auth.isAuthenticated().user &&
           auth.isAuthenticated().user._id == userId ? (
             <div className="edit-profile-icon text-center">

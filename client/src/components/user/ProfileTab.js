@@ -17,17 +17,17 @@ export default function ProfileTab(props) {
   };
   return (
     <div>
-      <div class="text-center mb-3">
-        <div class="tabs btn-group">
+      <div className="text-center mb-3">
+        <div className="tabs btn-group">
           <button
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             name="following"
             onClick={handleClick}
           >
             Following
           </button>
           <button
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             name="followers"
             data-bs-toggle="collapse"
             onClick={handleClick}
@@ -35,7 +35,7 @@ export default function ProfileTab(props) {
             Followers
           </button>
           <button
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             name="questions"
             data-bs-toggle="collapse"
             onClick={handleClick}
@@ -43,7 +43,7 @@ export default function ProfileTab(props) {
             Questions
           </button>
           <button
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             name="answers"
             data-bs-toggle="collapse"
             onClick={handleClick}
@@ -76,7 +76,7 @@ export default function ProfileTab(props) {
         )}
         {tabs.followers && (
           <div style={{ backgroundColor: "#d9d9d9", padding: "10px" }}>
-            <div class="followers mt-3 mx-auto">
+            <div className="followers mt-3 mx-auto">
               {props.followers.length > 0 ? (
                 props.followers.map((user) => {
                   return (
@@ -91,14 +91,14 @@ export default function ProfileTab(props) {
         )}
         {tabs.questions && (
           <div style={{ backgroundColor: "#d9d9d9", padding: "10px" }}>
-            <div class="questions mt-3 mx-auto">
+            <div className="questions mt-3 mx-auto">
               <PostedQuestions userId={props.userId && props.userId} />
             </div>
           </div>
         )}
         {tabs.answers && (
           <div style={{ backgroundColor: "#d9d9d9", padding: "10px" }}>
-            <div class="questions mt-3 mx-auto">
+            <div className="questions mt-3 mx-auto">
               <PostedAnswers userId={props.userId && props.userId} />
             </div>
           </div>

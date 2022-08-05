@@ -41,7 +41,6 @@ function PostedAnswers(props) {
     );
     remove({ answerId: postId }, { t: jwt.token })
       .then((response) => {
-        console.log(response);
         setSnackbar({ open: true, message: "Answer successfully deleted" });
       })
       .catch((err) => {
@@ -50,8 +49,6 @@ function PostedAnswers(props) {
   };
 
   const handleUpdate = (postId, values, setEditValues) => {
-    console.log(values);
-
     let newArray = answerValues.map((answer) => {
       if (answer._id === postId) {
         return {

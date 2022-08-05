@@ -12,7 +12,7 @@ function PostDetailed() {
   const jwt = auth.isAuthenticated();
   const [post, setPost] = useState({});
   const [values, setValues] = useState([]);
-  //Retrieve the single question
+
   useEffect(() => {
     question({ questionId: questionId }, { t: jwt.token })
       .then((response) => {
@@ -39,8 +39,6 @@ function PostDetailed() {
   const handleDelete = (id) => {
     deleteComment({ commentId: id }, { t: jwt.token })
       .then((response) => {
-        console.log(id);
-        console.log(response);
         setValues([
           ...values.filter((comment) => {
             return comment._id !== id;
@@ -63,7 +61,6 @@ function PostDetailed() {
           <Post post={post} credentials={jwt} />
         )}
       </div>
-      {/* {Object.keys(post).length !== 0 && <CommentThread postId={post._id} />} */}
       <div class="comment-thread mx-auto">
         {values &&
           values.map((comment) => {

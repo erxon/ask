@@ -25,7 +25,6 @@ function PostWithAnswers() {
   useEffect(() => {
     listAnswers({ questionId: questionId })
       .then((response) => {
-        console.log(response.data);
         setAnswers([...response.data.reverse()]);
       })
       .catch((err) => {
@@ -101,8 +100,8 @@ function PostWithAnswers() {
 
   return (
     <div>
-      <div class="row gx-0">
-        <div class="post col-lg-6 col-md-12">
+      <div className="row gx-0">
+        <div className="post col-lg-6 col-md-12">
           <div>
             {Object.keys(values.user).length !== 0 && (
               <UserDetails
@@ -116,12 +115,12 @@ function PostWithAnswers() {
             <Question title={values.title} content={values.content} />
           </div>
         </div>
-        <div class="col-lg-6 col-md-12 answers">
-          <div class="answer-input mt-3 mb-3">
-            <div class="d-flex">
+        <div className="col-lg-6 col-md-12 answers">
+          <div className="answer-input mt-3 mb-3">
+            <div className="d-flex">
               {/* row gx-0 container-fluid */}
               <div>
-                <div class="ms-2">
+                <div className="ms-2">
                   <ProfilePhoto userId={jwt.user._id} />
                 </div>
               </div>
@@ -144,7 +143,7 @@ function PostWithAnswers() {
                   name="content"
                   value={answer.content}
                   onChange={handleChange}
-                  class="form-control mt-3"
+                  className="form-control mt-3"
                   placeholder="description"
                 />
                 <button
@@ -157,10 +156,10 @@ function PostWithAnswers() {
               </div>
             )}
           </div>
-          <div class="answers-heading">
+          <div className="answers-heading">
             <h3>Answers</h3>
           </div>
-          <div class="answer-thread">
+          <div className="answer-thread">
             {answers.length > 0 ? (
               answers.map((answer) => {
                 return <Answer key={answer._id} answer={answer} jwt={jwt} />;

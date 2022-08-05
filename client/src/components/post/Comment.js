@@ -11,14 +11,17 @@ function Comment(props) {
   };
   return (
     <div>
-      <div class="row gx-0 mb-3">
-        <div class="col-2">
+      <div className="row gx-0 mb-3">
+        <div className="col-2">
           <ProfilePhoto userId={props.userId} />
         </div>
-        <div class="border rounded col-10 p-3">
-          <div class="mb-2">
-            <h6 class="d-inline">{props.userName}</h6>
-            <p class="d-inline time"> {displayElapsedTime(props.created)} </p>
+        <div className="border rounded col-10 p-3">
+          <div className="mb-2">
+            <h6 className="d-inline">{props.userName}</h6>
+            <p className="d-inline time">
+              {" "}
+              {displayElapsedTime(props.created)}{" "}
+            </p>
             <div className="d-inline">
               {auth.isAuthenticated().user._id === props.userId && (
                 <IconButton onClick={handleDeleteClick}>
@@ -29,7 +32,7 @@ function Comment(props) {
           </div>
 
           <div className="align-self-center">
-            <p class="comment-content">{props.content}</p>
+            <p className="comment-content">{props.content}</p>
           </div>
         </div>
       </div>

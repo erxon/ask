@@ -1,22 +1,20 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import auth from "../auth/auth-helper";
-import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <div>
-      <nav class="navbar navbar-expand navbar-dark px-4">
-        <div class="container-fluid">
-          <a class="navbar-brand">ASK</a>
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
+      <nav className="navbar navbar-expand navbar-dark px-4">
+        <div className="container-fluid">
+          <a className="navbar-brand">ASK</a>
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
               <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/users" className="nav-link">
                 Users
               </Link>

@@ -86,7 +86,6 @@ export default function LoginAndSignup() {
     };
     create(user)
       .then((response) => {
-        console.log(response);
         signin({ email: user.email, password: user.password })
           .then((response) => {
             const data = response.data;
@@ -120,8 +119,8 @@ export default function LoginAndSignup() {
   return (
     <div>
       <div className="login-signup container">
-        <div class="row">
-          <div class="login-signup-col col-lg-6 col-md-12">
+        <div className="row">
+          <div className="login-signup-col col-lg-6 col-md-12">
             <div className="heading">
               <h2 className="login">Login</h2>
             </div>
@@ -130,7 +129,7 @@ export default function LoginAndSignup() {
                 onChange={handleLoginInput}
                 value={loginInput.email}
                 name="email"
-                class="form-control"
+                className="form-control"
                 type="email"
                 placeholder="Email"
               />
@@ -139,7 +138,7 @@ export default function LoginAndSignup() {
                 onChange={handleLoginInput}
                 value={loginInput.password}
                 name="password"
-                class="form-control"
+                className="form-control"
                 type="password"
                 placeholder="Password"
               />
@@ -147,13 +146,13 @@ export default function LoginAndSignup() {
               <button
                 onClick={handleLoginSubmit}
                 type="button"
-                class="btn btn-custom btn-dark"
+                className="btn btn-custom btn-dark"
               >
                 Login
               </button>
             </div>
           </div>
-          <div class="login-signup-col col-lg-6 col-md-12">
+          <div className="login-signup-col col-lg-6 col-md-12">
             <div className="heading">
               <h2 className="signup">Signup</h2>
             </div>
@@ -162,7 +161,7 @@ export default function LoginAndSignup() {
                 onChange={handleSignupInput}
                 value={signupInput.name}
                 name="name"
-                class="form-control"
+                className="form-control"
                 type="text"
                 placeholder="Name"
               />
@@ -171,7 +170,7 @@ export default function LoginAndSignup() {
                 onChange={handleSignupInput}
                 value={signupInput.email}
                 name="email"
-                class="form-control"
+                className="form-control"
                 type="email"
                 placeholder="Email"
               />
@@ -180,7 +179,7 @@ export default function LoginAndSignup() {
                 onChange={handleSignupInput}
                 value={signupInput.password}
                 name="password"
-                class="form-control"
+                className="form-control"
                 type="password"
                 placeholder="Password"
               />
@@ -188,7 +187,7 @@ export default function LoginAndSignup() {
               <button
                 onClick={handleSignupSubmit}
                 type="button"
-                class="btn btn-custom btn-dark"
+                className="btn btn-custom btn-dark"
               >
                 Signup
               </button>

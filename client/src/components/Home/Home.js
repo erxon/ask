@@ -33,10 +33,10 @@ function Home() {
       {auth.isAuthenticated() && (
         <div>
           <div>
-            <div class="m-4">
+            <div className="m-4">
               <QuestionInput credentials={jwt} onSubmit={handleSubmit} />
             </div>
-            <div class="post">
+            <div className="post">
               {values.length > 0 &&
                 values.map((question) => {
                   return (
