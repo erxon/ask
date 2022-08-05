@@ -8,7 +8,7 @@ function PostedQuestions(props) {
   const [questionValues, setQuestions] = useState([]);
   const [snackbar, setSnackbar] = useState({
     open: false,
-    message: ""
+    message: "",
   });
   const jwt = auth.isAuthenticated();
   let message = "";
@@ -40,14 +40,14 @@ function PostedQuestions(props) {
     remove({ questionId: postId }, { t: jwt.token })
       .then((response) => {
         console.log(response);
-        setSnackbar({open: true, message: "Question successfully deleted"});
+        setSnackbar({ open: true, message: "Question successfully deleted" });
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleUpdate = (postId, values, index) => {
+  const handleUpdate = (postId, values, setEditValues) => {
     console.log(values);
 
     let newArray = questionValues.map((question) => {
@@ -65,23 +65,24 @@ function PostedQuestions(props) {
     update(
       {
         questionId: postId,
-        questionTitle: values.questionTitle,
-        questionBody: values.questionBody,
+        questionTitle: values.postTitle,
+        questionBody: values.postBody,
       },
       {
         t: jwt.token,
       }
     )
       .then(() => {
-        setSnackbar({open: true, message: "Question successfully edited"})
+        setSnackbar({ open: true, message: "Question successfully edited" });
+        setEditValues({ postTitle: "", postBody: "" });
       })
       .catch((err) => {
-        message = ""
+        message = "";
       });
   };
 
   const handleClose = () => {
-    setSnackbar({open: false});
+    setSnackbar({ open: false });
   };
   let index = -1;
   return (

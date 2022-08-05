@@ -37,15 +37,16 @@ function Home() {
               <QuestionInput credentials={jwt} onSubmit={handleSubmit} />
             </div>
             <div class="post">
-              {values.map((question) => {
-                return (
-                  <PostPreview
-                    key={question._id}
-                    question={question}
-                    credentials={jwt}
-                  />
-                );
-              })}
+              {values.length > 0 &&
+                values.map((question) => {
+                  return (
+                    <PostPreview
+                      key={question._id}
+                      question={question}
+                      credentials={jwt}
+                    />
+                  );
+                })}
             </div>
           </div>
         </div>

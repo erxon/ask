@@ -22,6 +22,7 @@ router
   .put(authCtrl.requireSignin, commentCtrl.edit)
   .delete(authCtrl.requireSignin, commentCtrl.remove);
 
+router.route("/api/comments/user/:userId").delete(commentCtrl.removeAll);
 router.param("commentId", commentCtrl.commentByID);
 
 export default router;

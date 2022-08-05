@@ -62,11 +62,11 @@ function QuestionInput(props) {
       usersVoted: [],
       created: new Date(),
     };
-    props.onSubmit(question);
 
     postQuestion(question, { t: props.credentials.token })
       .then((response) => {
         console.log(response);
+        props.onSubmit(response.data);
         setValues({
           ...values,
           questionTitle: "",

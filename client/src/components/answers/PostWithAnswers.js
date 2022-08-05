@@ -30,7 +30,6 @@ function PostWithAnswers() {
       })
       .catch((err) => {
         console.log(err);
-        alert("no answers yet");
       });
   }, []);
 
@@ -65,6 +64,12 @@ function PostWithAnswers() {
     submitAnswer(data, { t: jwt.token })
       .then((response) => {
         setAnswers([response.data, ...answers]);
+        setAnswer({
+          title: "",
+          content: "",
+          user: jwt.user._id,
+          questionId: questionId,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -137,7 +142,7 @@ function PostWithAnswers() {
                 <textarea
                   type="text"
                   name="content"
-                  value={answer.body}
+                  value={answer.content}
                   onChange={handleChange}
                   class="form-control mt-3"
                   placeholder="description"
@@ -156,10 +161,13 @@ function PostWithAnswers() {
             <h3>Answers</h3>
           </div>
           <div class="answer-thread">
-            {answers &&
+            {answers.length > 0 ? (
               answers.map((answer) => {
                 return <Answer key={answer._id} answer={answer} jwt={jwt} />;
-              })}
+              })
+            ) : (
+              <p className="p-4">There were no answers yet</p>
+            )}
           </div>
         </div>
       </div>

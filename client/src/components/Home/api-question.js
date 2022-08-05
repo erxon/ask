@@ -155,6 +155,30 @@ const remove = async (params, credentials) => {
   }
 };
 
+const removeAllQuestions = async (params) => {
+  try {
+    let response = await axios({
+      method: "delete",
+      url: localhost + "/api/questions/user/" + params.userId,
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const removeAllComments = async (params) => {
+  try {
+    let response = await axios({
+      method: "delete",
+      url: localhost + "/api/comments/user/" + params.userId,
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const update = async (params, credentials) => {
   try {
     let response = await axios({
@@ -187,4 +211,6 @@ export {
   remove,
   update,
   deleteComment,
+  removeAllQuestions,
+  removeAllComments,
 };

@@ -1,18 +1,15 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import auth from "../auth/auth-helper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 
 function QuestionAndAnswer(props) {
-
   const [openForm, setOpenForm] = useState(false);
   const [editValues, setEditValues] = useState({
     postTitle: props.postTitle,
-    postBody: props.postContent
-  })
-
-
+    postBody: props.postContent,
+  });
 
   let route = "";
 
@@ -24,18 +21,19 @@ function QuestionAndAnswer(props) {
 
   const deleteClick = () => {
     props.onDelete(props.postId);
-  }
+  };
 
   const handleEditClick = () => {
     setOpenForm(!openForm);
-  }
+  };
 
   const handleEditChange = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setEditValues({
-        ...editValues, [name]: value
+      ...editValues,
+      [name]: value,
     });
-  }
+  };
   const datePosted = new Date(props.postedAt);
   return (
     <div>
@@ -62,25 +60,32 @@ function QuestionAndAnswer(props) {
             </div>
           )}
         </div>
-        {openForm && <div >
-            <input 
-                className="form-control mb-3"
-                placeholder="Edit your question title here"
-                name="postTitle"
-                value={editValues.postTitle}
-                onChange={handleEditChange}
+        {openForm && (
+          <div>
+            <input
+              className="form-control mb-3"
+              placeholder="Edit your question title here"
+              name="postTitle"
+              value={editValues.postTitle}
+              onChange={handleEditChange}
             />
-            <textarea 
-                className="form-control mb-3"
-                placeholder="Edit your question content here"
-                name="postBody"
-                value={editValues.postBody}
-                onChange={handleEditChange}
+            <textarea
+              className="form-control mb-3"
+              placeholder="Edit your question content here"
+              name="postBody"
+              value={editValues.postBody}
+              onChange={handleEditChange}
             />
-            <button className="btn btn-custom" onClick={
-                () => {props.onSubmit(props.postId, editValues)}
-            }>Submit</button>
-        </div>}
+            <button
+              className="btn btn-custom"
+              onClick={() => {
+                props.onSubmit(props.postId, editValues, setEditValues);
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        )}
         <hr />
       </div>
       <div></div>

@@ -83,7 +83,7 @@ function PostDetailed() {
       {Object.keys(post).length !== 0 && (
         <CommentSection
           userId={jwt.user._id}
-          userName={post.user.name}
+          userName={jwt.user.name}
           postId={post._id}
           onSubmit={handleCommentSubmit}
         />

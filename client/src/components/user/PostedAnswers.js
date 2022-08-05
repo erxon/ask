@@ -49,7 +49,7 @@ function PostedAnswers(props) {
       });
   };
 
-  const handleUpdate = (postId, values) => {
+  const handleUpdate = (postId, values, setEditValues) => {
     console.log(values);
 
     let newArray = answerValues.map((answer) => {
@@ -67,8 +67,8 @@ function PostedAnswers(props) {
     update(
       {
         answerId: postId,
-        answerTitle: values.answerTitle,
-        answerBody: values.answerBody,
+        answerTitle: values.postTitle,
+        answerBody: values.postBody,
       },
       {
         t: jwt.token,
@@ -76,6 +76,7 @@ function PostedAnswers(props) {
     )
       .then(() => {
         setSnackbar({ open: true, message: "Answer successfully edited" });
+        setEditValues({ postTitle: "", postBody: "" });
       })
       .catch((err) => {
         console.log(err);
@@ -91,17 +92,19 @@ function PostedAnswers(props) {
       {/*Map questions and answers posted by the user*/}
       {answerValues.length > 0 ? (
         answerValues.map((post) => {
-          return <QuestionAndAnswer
-            key={post._id}
-            postId={post._id}
-            userId={post.user}
-            onDelete={handleDelete}
-            onSubmit={handleUpdate}
-            postTitle={post.answerTitle}
-            postContent={post.answerBody}
-            postedAt={post.created}
-            postTag={"answer"}
-          />;
+          return (
+            <QuestionAndAnswer
+              key={post._id}
+              postId={post._id}
+              userId={post.user}
+              onDelete={handleDelete}
+              onSubmit={handleUpdate}
+              postTitle={post.answerTitle}
+              postContent={post.answerBody}
+              postedAt={post.created}
+              postTag={"answer"}
+            />
+          );
         })
       ) : (
         <p>Didn't answered any question yet</p>

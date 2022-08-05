@@ -87,6 +87,16 @@ const remove = async (req, res) => {
     });
   }
 };
+const removeAll = async (req, res) => {
+  try {
+    let answersRemove = await Answer.deleteMany({ user: req.params.userId });
+    return res.json(answersRemove);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
 const vote = async (req, res) => {
   try {
     let result = await Answer.findByIdAndUpdate(
@@ -162,4 +172,5 @@ export default {
   vote,
   unvote,
   allAnswers,
+  removeAll,
 };

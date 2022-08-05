@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Navbar from "../Home/Navbar";
 import { useParams } from "react-router-dom";
 import ProfilePhoto from "./ProfilePhoto";
@@ -16,6 +17,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import { removeAllQuestions, removeAllComments } from "../Home/api-question";
+import { removeAllAnswers } from "../answers/api-answer";
 
 function Profile() {
   const { userId } = useParams();
@@ -28,15 +31,22 @@ function Profile() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     read({ userId: userId }, { t: jwt.token })
       .then((response) => {
         let following = checkFollow(response.data);
-        setValues({ ...values, user: response.data, following: following });
+        setValues({ user: response.data, following: following });
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+
+    return () => {
+      source.cancel();
+    };
+  }, [userId]);
 
   const dateJoined = values && new Date(values.user.created);
   /* */
@@ -87,10 +97,37 @@ function Profile() {
       .catch((err) => {
         console.log(err);
       });
+
+    //remove questions posted
+    removeAllAnswers({ userId: userId })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //remove answers posted
+    removeAllComments({ userId: userId })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //remove comments
+    removeAllQuestions({ userId: userId })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   if (navigate) {
-    return <Navigate to="/" />;
+    window.location = "/";
   }
   /* */
 
@@ -103,10 +140,10 @@ function Profile() {
         <div class="center user-info">
           <h3>{values.user.name && values.user.name}</h3>
           <p class="date">Joined: {dateJoined.toDateString()} </p>
-          <p class="about d-inline">{values && values.about}</p>
+          <p class="about d-inline">{values && values.user.about}</p>
           {auth.isAuthenticated().user &&
           auth.isAuthenticated().user._id == userId ? (
-            <div className="d-inline ms-3 edit-profile-icon">
+            <div className="edit-profile-icon text-center">
               <IconButton onClick={handleOpenClick} size="small">
                 <DeleteIcon fontSize="small" sx={{ color: "#ed4a4f" }} />
               </IconButton>

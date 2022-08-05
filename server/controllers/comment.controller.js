@@ -77,6 +77,17 @@ const remove = async (req, res) => {
   }
 };
 
+const removeAll = async (req, res) => {
+  try {
+    let commentsRemove = await Comment.deleteMany({ user: req.params.userId });
+    return commentsRemove;
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
+
 const like = async (req, res) => {
   try {
     let result = await Comment.findByIdAndUpdate(
@@ -115,4 +126,5 @@ export default {
   commentByID,
   like,
   unlike,
+  removeAll,
 };

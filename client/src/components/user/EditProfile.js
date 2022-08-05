@@ -75,11 +75,6 @@ function EditProfile() {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     setValues({ ...values, [name]: value });
   };
-  // GET user's profile photo
-  // const photoUrl = values.id ? `/api/users/photo/${values.id}?${new Date().getTime()}` : '/api/users/defaultPhoto';
-  // console.log(photoUrl);
-
-  console.log(values);
   if (values.redirectToProfile) {
     return <Navigate to={"/profile/" + values.id} />;
   }
