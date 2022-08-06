@@ -8,7 +8,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 This project is a forum web app. This is the project I created to explore the connection between backend and frontend part of a website.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -42,9 +41,44 @@ If you do not have one of these prerequisites, follow the link given, and downlo
    git clone https://github.com/erxon/ask
    ```
 2. Install NPM packages
+
+    In your terminal, go to your project folder and type:
+    
    ```sh
    npm install
    ```
+   You should also declare this command inside the client folder to install client modules
+   
+3. Setting up MongoDB
+   - Download MongoDB at their official site linked above
+   - Install it by following the installation wizard
+   - Create the directory /data/db in your local disk
+   - Start the MongoDB database in bash terminal by executing this command:
+   
+   
+     ```sh
+     "C:\Program Files\MongoDB\Server\6.0\bin\mongod.exe" --dbpath="c:\data\db"
+     ```
+4. Starting the application
+   - Make sure MongoDB is running
+   - Create a new tab in your terminal, go to the project directory and start the server by executing the following command using the package manager of your choice
+   
+   
+     ```sh
+     yarn development
+     ```
+     ```sh
+     npm development
+     ```
+   - To start the client side, go to the client folder and execute the following command:
+   
+   
+     ```sh
+     yarn start
+     ```
+     ```sh
+     npm start
+     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -54,6 +88,16 @@ If you do not have one of these prerequisites, follow the link given, and downlo
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+  - Login and Signup
+  - Editting the profile
+  - The profile view
+  - List of users
+  - Following and unfollowing users
+  - Posting a question
+  - Voting a question
+  - Answering a question
+  - Commenting
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
