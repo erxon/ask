@@ -7,7 +7,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This project is a forum web app like Quora. This is the project I created to explore the connection between backend and frontend part of a website.   
+This project is a forum web app like Quora. This is the project I created to explore the connection between backend and frontend part of a web app.   
 
 
 ![welcome page](/photos/welcome-page.png)
@@ -49,7 +49,12 @@ If you do not have one of these prerequisites, follow the link given, and downlo
    ```sh
    npm install
    ```
-   You should also declare this command inside the client folder to install client modules
+    In the client directory:
+    
+   ```sh
+   cd client
+   npm install
+   ```
    
 3. Setting up MongoDB
    - Download MongoDB at their official site linked above
