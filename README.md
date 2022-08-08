@@ -10,6 +10,8 @@
 This project is a forum web app. This is the project I created to explore the connection between backend and frontend part of a website.
 
 
+![welcome page](/photos/welcome-page.png)
+
 
 ### Built With
 
