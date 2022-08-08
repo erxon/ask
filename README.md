@@ -7,12 +7,12 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This project is a forum web app. This is the project I created to explore the connection between backend and frontend part of a website.
+This project is a forum web app like Quora. This is the project I created to explore the connection between backend and frontend part of a website.   
 
 
 ![welcome page](/photos/welcome-page.png)
-
-
+![typing question](/photos/typing-question.png)
+![answers](/photos/answering.png)
 ### Built With
 
 * React.js
@@ -99,7 +99,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [FB: Ericson Castasus](https://facebook.com/ericson.castasus) - castasuse@gmail.com
+Ericson Castasus - [FB: Ericson Castasus](https://facebook.com/ericson.castasus) - castasuse@gmail.com
 
 Project Link: [https://github.com/erxon/ask](https://github.com/erxon/ask)
 
