@@ -80,46 +80,6 @@ If you do not have one of these prerequisites, follow the link given, and downlo
      npm start
      ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-  - Login and Signup
-    ![Login and signup](C:/Users/Reginald/Pictures/photos/login-signup.png)
-  - Editting the profile
-  - The profile view
-  - List of users
-  - Following and unfollowing users
-  - Posting a question
-  - Voting a question
-  - Answering a question
-  - Commenting
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -134,35 +94,14 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [FB: Ericson Castasus](https://facebook.com/ericson.castasus) - castasuse@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+Project Link: [https://github.com/erxon/ask](https://github.com/erxon/ask)
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## Reference
 
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+* [Full-stack React Projects](https://github.com/PacktPublishing/Full-Stack-React-Projects-Second-Edition) - This book is a big help to me. I get ideas from it and find how things should work.
